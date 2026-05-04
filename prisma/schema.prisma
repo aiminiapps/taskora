@@ -1,0 +1,124 @@
+// Orkestri AI — Database Schema
+// Supabase (PostgreSQL) via Prisma ORM
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Agent {
+  id           String          @id @default(cuid())
+  slug         String          @unique
+  name         String
+  type         String
+  specialty    String
+  systemPrompt String          @db.Text
+  avatarColor  String
+  emoji        String          @default("🤖")
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+  stats        AgentStats?
+  responses    AgentResponse[]
+
+  @@map("agents")
+}
+
+model AgentStats {
+  id             String   @id @default(cuid())
+  agentId        String   @unique
+  agent          Agent    @relation(fields: [agentId], references: [id], onDelete: Cascade)
+  totalAnalyses  Int      @default(0)
+  totalWins      Int      @default(0)
+  winRate        Float    @default(0)
+  avgScore       Float    @default(0)
+  totalScore     Int      @default(0)
+  avgResponseMs  Float    @default(0)
+  totalResponseMs BigInt  @default(0)
+  updatedAt      DateTime @updatedAt
+
+  @@map("agent_stats")
+}
+
+model Analysis {
+  id              String          @id @default(cuid())
+  token           String
+  contractAddress String?
+  question        String          @db.Text
+  category        String
+  language        String          @default("English")
+  style           String          @default("Detailed")
+  walletAddress   String?
+  createdAt       DateTime        @default(now())
+  responses       AgentResponse[]
+
+  @@index([walletAddress])
+  @@index([createdAt])
+  @@map("analyses")
+}
+
+model AgentResponse {
+  id         String   @id @default(cuid())
+  analysisId String
+  analysis   Analysis @relation(fields: [analysisId], references: [id], onDelete: Cascade)
+  agentSlug  String
+  agent      Agent    @relation(fields: [agentSlug], references: [slug])
+  content    String   @db.Text
+  responseMs Int      @default(0)
+  isWinner   Boolean  @default(false)
+  createdAt  DateTime @default(now())
+
+  @@index([analysisId])
+  @@index([agentSlug])
+  @@index([isWinner])
+  @@map("agent_responses")
+}
+
+model UserReward {
+  id            String   @id @default(cuid())
+  walletAddress String   @unique
+  okaiBalance   Int      @default(0)
+  totalEarned   Int      @default(0)
+  analysisCount Int      @default(0)
+  voteCount     Int      @default(0)
+  compareCount  Int      @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([walletAddress])
+  @@map("user_rewards")
+}
+
+model RewardLog {
+  id            String   @id @default(cuid())
+  walletAddress String
+  action        String   // "analysis" | "vote" | "compare" | "withdrawal"
+  amount        Int
+  referenceId   String?  // analysisId, compareId, or txHash
+  createdAt     DateTime @default(now())
+
+  @@index([walletAddress])
+  @@index([createdAt])
+  @@map("reward_logs")
+}
+
+model WithdrawalLog {
+  id            String   @id @default(cuid())
+  walletAddress String
+  amount        Int
+  txHash        String?
+  status        String   @default("pending") // "pending" | "confirmed" | "failed"
+  blockNumber   Int?
+  gasUsed       Int?
+  processingMs  Int?
+  createdAt     DateTime @default(now())
+
+  @@index([walletAddress])
+  @@index([txHash])
+  @@index([createdAt])
+  @@map("withdrawal_logs")
+}
