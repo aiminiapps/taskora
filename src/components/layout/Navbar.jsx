@@ -8,7 +8,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   RiSwordLine,
   RiTrophyLine,
-  RiRobot2Line,
   RiUser3Line,
   RiWallet3Line,
   RiArrowLeftRightLine,
@@ -66,7 +65,7 @@ export default function Navbar() {
           className={cn(
             "max-w-5xl mx-auto rounded-2xl flex flex-col pointer-events-auto transition-all duration-500",
             isScrolled || mobileMenuOpen
-              ? "bg-[#0b0c12]/80 backdrop-blur-xl border border-white/[0.08] shadow-2xl shadow-black/50"
+              ? "bg-[#0A0B14]/85 backdrop-blur-2xl border border-white/[0.06] shadow-[0_8px_32px_rgba(0,0,0,0.5)]"
               : "bg-transparent border border-transparent"
           )}
           initial={{ y: -20, opacity: 0 }}
@@ -76,11 +75,11 @@ export default function Navbar() {
           <div className="flex items-center justify-between h-14 px-4 sm:px-5">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2.5 group">
-             <Image src="/logo.png" alt="Orkestri Logo" width={140} height={50} />
+             <Image src="/logo.png" alt="Taskora Logo" width={140} height={50} />
             </Link>
 
-            {/* Desktop Nav */}
-            <nav className="hidden md:flex items-center gap-1.5 absolute left-1/2 -translate-x-1/2">
+            {/* Desktop Nav — Centered Pill */}
+            <nav className="hidden md:flex items-center gap-1 absolute left-1/2 -translate-x-1/2 bg-white/[0.03] border border-white/[0.05] rounded-xl p-1">
               {navLinks.map((link) => {
                 const isActive =
                   link.href === "/"
@@ -91,23 +90,23 @@ export default function Navbar() {
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="relative group px-3 py-2 rounded-xl"
+                    className="relative group px-3.5 py-2 rounded-lg"
                   >
                     <span
                       className={cn(
                         "relative z-10 flex items-center gap-1.5 text-sm font-medium transition-colors duration-300",
                         isActive
                           ? "text-white"
-                          : "text-white/50 group-hover:text-white"
+                          : "text-white/45 group-hover:text-white/80"
                       )}
                     >
-                      <link.icon className={cn("text-[15px]", isActive ? "text-[#7c75ff]" : "")} />
+                      <link.icon className={cn("text-[15px]", isActive ? "text-[#8B5CF6]" : "")} />
                       {link.label}
                     </span>
                     {isActive && (
                       <motion.div
                         layoutId="nav-pill"
-                        className="absolute inset-0 bg-white/[0.06] border border-white/[0.08] rounded-xl -z-0"
+                        className="absolute inset-0 bg-[#8B5CF6]/10 border border-[#8B5CF6]/20 rounded-lg -z-0"
                         transition={{
                           type: "spring",
                           stiffness: 400,
@@ -125,7 +124,7 @@ export default function Navbar() {
               {isConnected && (
                 <Link
                   href="/profile"
-                  className="hidden md:flex items-center gap-1.5 px-3 py-2 rounded-xl text-sm font-medium text-white/50 hover:text-white hover:bg-white/[0.06] transition-all"
+                  className="hidden md:flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium text-white/45 hover:text-white hover:bg-white/[0.05] transition-all"
                 >
                   <RiUser3Line />
                   Profile
@@ -137,8 +136,8 @@ export default function Navbar() {
                 className={cn(
                   "flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300 cursor-pointer",
                   isConnected
-                    ? "bg-[#7c75ff]/10 border border-[#7c75ff]/20 text-[#7c75ff] hover:bg-[#7c75ff]/15"
-                    : "bg-gradient-to-r from-[#7c75ff] to-[#5b54e5] text-white hover:opacity-90 shadow-lg shadow-[#7c75ff]/20"
+                    ? "bg-[#8B5CF6]/10 border border-[#8B5CF6]/20 text-[#A78BFA] hover:bg-[#8B5CF6]/15 hover:border-[#8B5CF6]/30"
+                    : "bg-gradient-to-r from-[#8B5CF6] to-[#7C3AED] text-white hover:opacity-90 shadow-lg shadow-[#8B5CF6]/20"
                 )}
               >
                 <RiWallet3Line className="text-base" />
@@ -150,7 +149,7 @@ export default function Navbar() {
               {/* Mobile Menu Toggle */}
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="md:hidden w-10 h-10 rounded-xl bg-white/[0.04] border border-white/[0.08] flex items-center justify-center text-white/70 hover:text-white transition-colors"
+                className="md:hidden w-10 h-10 rounded-xl bg-white/[0.04] border border-white/[0.06] flex items-center justify-center text-white/60 hover:text-white transition-colors"
               >
                 {mobileMenuOpen ? (
                   <RiCloseLine className="text-xl" />
@@ -169,11 +168,10 @@ export default function Navbar() {
                 animate={{ height: "auto", opacity: 1 }}
                 exit={{ height: 0, opacity: 0 }}
                 transition={{ duration: 0.3, ease: "easeInOut" }}
-                className="md:hidden overflow-hidden border-t border-white/[0.06] bg-[#0b0c12]/95 backdrop-blur-2xl rounded-b-2xl"
+                className="md:hidden overflow-hidden border-t border-white/[0.05] bg-[#0A0B14]/95 backdrop-blur-2xl rounded-b-2xl"
               >
                 <div className="flex flex-col p-4 gap-2">
                   {[...navLinks, { href: "/profile", label: "Profile", icon: RiUser3Line }].map((link, i) => {
-                    // Only show profile if connected, or always show it but it prompts connect? We can secure it or hide it.
                     if (link.href === "/profile" && !isConnected) return null;
                     
                     const isActive =
@@ -194,11 +192,11 @@ export default function Navbar() {
                           className={cn(
                             "flex items-center gap-3 p-4 rounded-xl text-lg font-medium transition-colors",
                             isActive
-                              ? "bg-white/[0.06] text-white border border-white/[0.05]"
-                              : "text-white/60 hover:text-white hover:bg-white/[0.04]"
+                              ? "bg-[#8B5CF6]/10 text-white border border-[#8B5CF6]/15"
+                              : "text-white/50 hover:text-white hover:bg-white/[0.03]"
                           )}
                         >
-                          <div className={cn("w-10 h-10 rounded-lg flex items-center justify-center", isActive ? "bg-[#7c75ff]/20 text-[#7c75ff]" : "bg-white/[0.04]")}>
+                          <div className={cn("w-10 h-10 rounded-lg flex items-center justify-center", isActive ? "bg-[#8B5CF6]/20 text-[#A78BFA]" : "bg-white/[0.04]")}>
                              <link.icon className="text-xl" />
                           </div>
                           {link.label}

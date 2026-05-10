@@ -16,15 +16,16 @@ const dmMono = DM_Mono({
 });
 
 export const metadata = {
-  metadataBase: new URL("https://www.orkestri-ai.xyz"),
+  metadataBase: new URL("https://www.taskora-ai.xyz"),
   title: {
-    default: "Orkestri AI — Multi-Agent Crypto Intelligence Arena",
-    template: "%s | Orkestri AI",
+    default: "Taskora AI — Multi-Agent Crypto Intelligence Arena",
+    template: "%s | Taskora AI",
   },
   description:
     "Navigate the crypto landscape with real-time multi-agent consensus. Compare AI-powered crypto investment analyses from Research, Market, and Risk agents for smarter investment decisions.",
   keywords: [
-    "Orkestri AI",
+    "Taskora AI",
+    "TSKR",
     "crypto",
     "AI agents",
     "crypto investment",
@@ -33,8 +34,8 @@ export const metadata = {
     "DeFi",
     "multi-agent consensus"
   ],
-  authors: [{ name: "Orkestri AI", url: "https://www.orkestri-ai.xyz" }],
-  creator: "Orkestri AI",
+  authors: [{ name: "Taskora AI", url: "https://www.taskora-ai.xyz" }],
+  creator: "Taskora AI",
   icons: {
     icon: "/agent.png",
     shortcut: "/agent.png",
@@ -43,9 +44,9 @@ export const metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://www.orkestri-ai.xyz",
-    siteName: "Orkestri AI",
-    title: "Orkestri AI — Multi-Agent Crypto Intelligence Arena",
+    url: "https://www.taskora-ai.xyz",
+    siteName: "Taskora AI",
+    title: "Taskora AI — Multi-Agent Crypto Intelligence Arena",
     description:
       "Navigate the crypto landscape with real-time multi-agent consensus from Research, Market, and Risk agents.",
     images: [
@@ -53,13 +54,13 @@ export const metadata = {
         url: "/og.png",
         width: 1200,
         height: 630,
-        alt: "Orkestri AI — Multi-Agent Crypto Intelligence Arena",
+        alt: "Taskora AI — Multi-Agent Crypto Intelligence Arena",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Orkestri AI — Multi-Agent Crypto Intelligence Arena",
+    title: "Taskora AI — Multi-Agent Crypto Intelligence Arena",
     description:
       "Compare AI-powered crypto investment analyses from Research, Market, and Risk agents.",
     images: ["/og.png"],
@@ -85,9 +86,9 @@ export default function RootLayout({ children }) {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Organization",
-              name: "Orkestri AI",
-              url: "https://www.orkestri-ai.xyz",
-              logo: "https://www.orkestri-ai.xyz/agent.png",
+              name: "Taskora AI",
+              url: "https://www.taskora-ai.xyz",
+              logo: "https://www.taskora-ai.xyz/agent.png",
               sameAs: [
                 "https://orkestri-ai.gitbook.io/orkestri-ai-docs",
               ],
@@ -95,7 +96,7 @@ export default function RootLayout({ children }) {
           }}
         />
       </head>
-      <body className="min-h-screen bg-gradient-animated">
+      <body className="min-h-screen font-sans antialiased">
         <WalletProvider>{children}</WalletProvider>
       </body>
     </html>

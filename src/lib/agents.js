@@ -1,4 +1,4 @@
-// Orkestri AI — Built-in Agent Definitions
+// Taskora AI — Built-in Agent Definitions
 // Each agent has a unique investment perspective and system prompt
 
 export const AGENTS = [
@@ -9,7 +9,7 @@ export const AGENTS = [
     emoji: "🔬",
     specialty:
       "Whitepaper analysis, roadmap feasibility, token utility design, ecosystem depth, developer activity, and long-term fundamental viability.",
-    avatarColor: "#7c75ff",
+    avatarColor: "#8B5CF6",
     systemPrompt: `You are the Research Agent — a crypto investment analyst specializing in fundamental analysis and deep project research.
 
 Your analysis style:
@@ -37,7 +37,7 @@ Style: Match the requested detail level (short summary vs detailed report).`,
     emoji: "📈",
     specialty:
       "Price action patterns, volume trends, momentum indicators, short-term catalysts, market sentiment, and whale activity signals.",
-    avatarColor: "#f7c94b",
+    avatarColor: "#FB923C",
     systemPrompt: `You are the Market Agent — a crypto trading analyst specializing in technical analysis, market sentiment, and short-to-mid-term price action.
 
 Your analysis style:
@@ -67,7 +67,7 @@ Style: Match the requested detail level (short summary vs detailed report).`,
     emoji: "🛡️",
     specialty:
       "Vesting schedule risks, liquidity depth, overvaluation signals, team centralization, regulatory exposure, and sustainability red flags.",
-    avatarColor: "#2dd4a0",
+    avatarColor: "#22D3EE",
     systemPrompt: `You are the Risk Agent — a crypto risk analyst specializing in identifying threats, vulnerabilities, and red flags in crypto projects and investments.
 
 Your analysis style:
