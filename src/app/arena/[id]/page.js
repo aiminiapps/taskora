@@ -123,13 +123,13 @@ const HubNode = ({ data }) => {
   const { analysis, market } = data;
   return (
     <>
-      <div className="w-[440px] rounded-2xl relative overflow-hidden border border-[#7c75ff]/20 bg-[#0b0c10]">
+      <div className="w-[440px] rounded-2xl relative overflow-hidden border border-[#fc7b43]/20 bg-[#11121A] shadow-2xl">
         {/* Crosshatch left strip */}
         <div
-          className="absolute left-0 top-0 w-5 h-full border-r border-[#7c75ff]/15 pointer-events-none"
+          className="absolute left-0 top-0 w-5 h-full border-r border-[#fc7b43]/15 pointer-events-none"
           style={{
             backgroundImage:
-              "repeating-linear-gradient(315deg, rgba(124,117,255,0.12) 0, rgba(124,117,255,0.12) 1px, transparent 0, transparent 50%)",
+              "repeating-linear-gradient(315deg, rgba(252,123,67,0.12) 0, rgba(252,123,67,0.12) 1px, transparent 0, transparent 50%)",
             backgroundSize: "8px 8px",
           }}
         />
@@ -142,7 +142,7 @@ const HubNode = ({ data }) => {
                 <img src={market.image} alt="" className="w-9 h-9 rounded-full mx-auto my-auto" />
               )}
               <div>
-                <h2 className="text-3xl font-extrabold text-white tracking-tight">
+                <h2 className="text-3xl font-medium text-white tracking-tight">
                   {analysis.token}
                 </h2>
                 {market?.symbol && (
@@ -155,7 +155,7 @@ const HubNode = ({ data }) => {
             </div>
             {market?.price != null && (
               <div className="text-right">
-                <p className="text-xl font-bold font-mono text-white">
+                <p className="text-xl font-medium font-mono text-white">
                   ${market.price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 4 })}
                 </p>
                 {market.change24h != null && (
@@ -175,35 +175,35 @@ const HubNode = ({ data }) => {
           </div>
 
           {/* Question */}
-          <div className="text-white/50 text-[13px] leading-relaxed bg-white/[0.02] p-3.5 rounded-xl border border-white/[0.04] mb-4 nodrag nowheel">
+          <div className="text-white/40 font-light text-[13px] leading-relaxed bg-[#0A0B14] p-4 rounded-xl border border-white/[0.03] mb-4 nodrag nowheel">
             {analysis.question}
           </div>
 
           {/* Market mini-stats */}
           {market && (
             <div className="grid grid-cols-3 gap-2 mb-3">
-              <div className="rounded-lg bg-white/[0.02] border border-white/[0.04] p-2.5">
-                <span className="text-[8px] text-white/20 uppercase tracking-widest block mb-0.5">
+              <div className="rounded-xl bg-[#0A0B14] border border-white/[0.03] p-3">
+                <span className="text-[9px] text-white/30 uppercase tracking-wide block mb-1">
                   Market Cap
                 </span>
-                <span className="text-[12px] font-mono font-bold text-white/80">
+                <span className="text-[12px] font-mono font-medium text-white/90">
                   {fmt(market.marketCap)}
                 </span>
               </div>
-              <div className="rounded-lg bg-white/[0.02] border border-white/[0.04] p-2.5">
-                <span className="text-[8px] text-white/20 uppercase tracking-widest block mb-0.5">
+              <div className="rounded-xl bg-[#0A0B14] border border-white/[0.03] p-3">
+                <span className="text-[9px] text-white/30 uppercase tracking-wide block mb-1">
                   24h Vol
                 </span>
-                <span className="text-[12px] font-mono font-bold text-white/80">
+                <span className="text-[12px] font-mono font-medium text-white/90">
                   {fmt(market.volume)}
                 </span>
               </div>
-              <div className="rounded-lg bg-white/[0.02] border border-white/[0.04] p-2.5">
-                <span className="text-[8px] text-white/20 uppercase tracking-widest block mb-0.5">
+              <div className="rounded-xl bg-[#0A0B14] border border-white/[0.03] p-3">
+                <span className="text-[9px] text-white/30 uppercase tracking-wide block mb-1">
                   7d
                 </span>
                 <span
-                  className={`text-[12px] font-mono font-bold ${market.change7d != null ? (market.change7d >= 0 ? "text-[#2dd4a0]" : "text-[#ff6b5b]") : "text-white/40"}`}
+                  className={`text-[12px] font-mono font-medium ${market.change7d != null ? (market.change7d >= 0 ? "text-[#2dd4a0]" : "text-[#ff6b5b]") : "text-white/40"}`}
                 >
                   {market.change7d != null
                     ? `${market.change7d >= 0 ? "+" : ""}${market.change7d.toFixed(2)}%`
@@ -214,14 +214,14 @@ const HubNode = ({ data }) => {
           )}
 
           {/* Meta tags */}
-          <div className="flex flex-wrap gap-1.5">
-            <span className="text-[9px] font-mono text-[#4a9eff]/70 px-2.5 py-1 rounded-md bg-[#4a9eff]/8 border border-[#4a9eff]/15">
+          <div className="flex flex-wrap gap-2">
+            <span className="text-[10px] font-mono text-[#fc7b43] px-2.5 py-1 rounded-md bg-[#fc7b43]/10 border border-[#fc7b43]/20">
               {analysis.category}
             </span>
-            <span className="text-[9px] font-mono text-white/25 px-2.5 py-1 rounded-md bg-white/[0.02] border border-white/[0.04]">
+            <span className="text-[10px] font-mono text-white/40 px-2.5 py-1 rounded-md bg-[#0A0B14] border border-white/[0.04]">
               {analysis.language}
             </span>
-            <span className="text-[9px] font-mono text-white/25 px-2.5 py-1 rounded-md bg-white/[0.02] border border-white/[0.04]">
+            <span className="text-[10px] font-mono text-white/40 px-2.5 py-1 rounded-md bg-[#0A0B14] border border-white/[0.04]">
               {analysis.style || "Detailed Report"}
             </span>
           </div>
@@ -254,37 +254,32 @@ const AgentNode = ({ data }) => {
         className={`w-[380px] transition-all duration-700 ${isWinnerNode ? "scale-[1.02]" : isLoser ? "opacity-40 grayscale-[30%]" : ""}`}
       >
         <div
-          className={`w-full rounded-2xl relative overflow-hidden transition-all duration-500 ${isWinnerNode ? "border-[#f7c94b]/40 bg-[#0a0b12]" : "border-white/[0.06] bg-[#0a0b12]"}`}
+          className={`w-full rounded-2xl relative overflow-hidden transition-all duration-500 ${isWinnerNode ? "border-[#fc7b43]/40 bg-[#11121A] shadow-[0_0_30px_rgba(252,123,67,0.1)]" : "border-white/[0.03] bg-[#11121A]"}`}
           style={{ borderWidth: "1px", borderStyle: "solid" }}
         >
           {/* Winner glow bar */}
           {isWinnerNode && (
-            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#f7c94b] to-transparent" />
+            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#fc7b43] to-transparent" />
           )}
 
-          <div className="p-5">
+          <div className="p-6">
             {/* Agent identity */}
-            <div className="flex items-center gap-3 mb-4">
+            <div className="flex items-center gap-3 mb-5">
               <div
-                className="w-11 h-11 rounded-xl flex items-center justify-center"
-                style={{
-                  background: `linear-gradient(135deg, ${agent.avatarColor}18, ${agent.avatarColor}05)`,
-                  border: `1px solid ${agent.avatarColor}30`,
-                  color: agent.avatarColor,
-                }}
+                className="w-12 h-12 rounded-xl flex items-center justify-center bg-[#fc7b43]/10 border border-[#fc7b43]/20 text-[#fc7b43]"
               >
                 {AGENT_ICONS[agentSlug]}
               </div>
               <div className="flex-1 min-w-0">
-                <h3 className="font-bold text-[15px] text-white/90">{agent.name}</h3>
-                <p className="text-[9px] text-white/30 font-mono tracking-[0.15em] uppercase mt-0.5">
+                <h3 className="font-medium text-[16px] text-white tracking-tight">{agent.name}</h3>
+                <p className="text-[10px] text-[#fc7b43] font-mono tracking-[0.1em] uppercase mt-0.5">
                   {agent.type}
                 </p>
               </div>
               {isWinnerNode && voted && (
-                <div className="flex items-center gap-1 px-2.5 py-1 rounded-md bg-[#f7c94b]/10 border border-[#f7c94b]/25">
-                  <RiTrophyLine className="text-[#f7c94b] text-xs" />
-                  <span className="text-[9px] font-bold text-[#f7c94b] uppercase tracking-wider">
+                <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#fc7b43]/10 border border-[#fc7b43]/25">
+                  <RiTrophyLine className="text-[#fc7b43] text-sm" />
+                  <span className="text-[10px] font-bold text-[#fc7b43] uppercase tracking-wider">
                     Winner
                   </span>
                 </div>
@@ -292,15 +287,15 @@ const AgentNode = ({ data }) => {
             </div>
 
             {/* Stats row */}
-            <div className="flex items-center gap-3 mb-4">
+            <div className="flex items-center gap-4 mb-5">
               {responseMs > 0 && (
-                <div className="flex items-center gap-1 text-[10px] font-mono text-white/25">
+                <div className="flex items-center gap-1.5 text-[11px] font-mono text-white/30">
                   <RiTimeLine />
                   {(responseMs / 1000).toFixed(1)}s
                 </div>
               )}
               {wordCount > 0 && (
-                <div className="flex items-center gap-1 text-[10px] font-mono text-white/25">
+                <div className="flex items-center gap-1.5 text-[11px] font-mono text-white/30">
                   <RiBarChartBoxLine />
                   {wordCount} words
                 </div>
@@ -310,14 +305,9 @@ const AgentNode = ({ data }) => {
             {/* Read Full Analysis button */}
             <button
               onClick={() => onOpenDetail(agentSlug)}
-              className="w-full py-2 rounded-lg text-[11px] font-semibold uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center gap-1.5 mb-3"
-              style={{
-                background: `linear-gradient(135deg, ${agent.avatarColor}10, ${agent.avatarColor}05)`,
-                border: `1px solid ${agent.avatarColor}20`,
-                color: agent.avatarColor,
-              }}
+              className="w-full py-3 rounded-xl text-[12px] font-medium transition-all cursor-pointer flex items-center justify-center gap-2 mb-3 bg-[#0A0B14] border border-white/[0.04] text-white/60 hover:text-white hover:border-white/[0.1] hover:bg-[#fc7b43]/5"
             >
-              <RiSparklingLine />
+              <RiSparklingLine className="text-[#fc7b43] text-sm" />
               Read Full Analysis
             </button>
 
@@ -326,34 +316,31 @@ const AgentNode = ({ data }) => {
               <button
                 onClick={onVote}
                 disabled={voting}
-                className={`w-full relative rounded-xl overflow-hidden group py-3 flex items-center justify-center font-bold text-white tracking-wide text-[12px] transition-all cursor-pointer ${voting ? "opacity-50 cursor-not-allowed" : ""}`}
-                style={{
-                  background: "linear-gradient(135deg, #8a84ff 0%, #7c75ff 50%, #5b54e5 100%)",
-                }}
+                className={`w-full relative rounded-xl overflow-hidden group py-3.5 flex items-center justify-center font-medium text-white tracking-wide text-[14px] transition-all cursor-pointer bg-[#fc7b43] hover:opacity-90 ${voting ? "opacity-50 cursor-not-allowed" : ""}`}
               >
                 {/* Sweep */}
                 <div className="absolute inset-0 -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-[1000ms] ease-in-out bg-gradient-to-r from-transparent via-white/25 to-transparent -skew-x-12 pointer-events-none" />
                 <span className="relative z-10 flex items-center gap-2">
                   {voting ? (
                     <>
-                      <div className="w-3.5 h-3.5 border-2 border-white/20 border-t-white/90 rounded-full animate-spin" />
+                      <div className="w-4 h-4 border-2 border-white/20 border-t-white/90 rounded-full animate-spin" />
                       Locking...
                     </>
                   ) : (
                     <>
-                      <RiCheckboxCircleLine className="text-sm" />
+                      <RiCheckboxCircleLine className="text-lg" />
                       Select as Best
                     </>
                   )}
                 </span>
               </button>
             ) : isWinnerNode ? (
-              <div className="flex items-center justify-center gap-2 py-3 rounded-xl bg-[#f7c94b]/8 border border-[#f7c94b]/25 text-[#f7c94b] text-[11px] font-bold tracking-[0.15em] uppercase">
-                <RiTrophyLine />
+              <div className="flex items-center justify-center gap-2 py-3.5 rounded-xl bg-[#fc7b43]/10 border border-[#fc7b43]/20 text-[#fc7b43] text-[12px] font-bold tracking-[0.15em] uppercase">
+                <RiTrophyLine className="text-lg" />
                 Winning Protocol
               </div>
             ) : (
-              <div className="py-3 rounded-xl bg-white/[0.02] text-white/15 text-[11px] font-medium tracking-wide w-full text-center border border-white/[0.02] uppercase">
+              <div className="py-3.5 rounded-xl bg-[#0A0B14] text-white/20 text-[12px] font-medium tracking-wide w-full text-center border border-white/[0.02] uppercase">
                 Dormant
               </div>
             )}
@@ -370,15 +357,15 @@ const SectionNode = ({ data }) => (
   <>
     <Handle type="target" position={Position.Left} className="!opacity-0 !w-0" />
     <div
-      className={`w-[500px] h-[200px] rounded-xl overflow-hidden transition-all duration-500 ${data.isWinnerNode ? "border-[#f7c94b]/20 scale-[1.01]" : "border-white/[0.05]"} bg-[#0b0c12]`}
+      className={`w-[500px] h-[220px] rounded-2xl overflow-hidden transition-all duration-500 ${data.isWinnerNode ? "border-[#fc7b43]/30 shadow-[0_0_20px_rgba(252,123,67,0.05)] scale-[1.01]" : "border-white/[0.03]"} bg-[#11121A]`}
       style={{ borderWidth: "1px", borderStyle: "solid" }}
     >
-      <div className="w-full h-full p-5 flex flex-col relative">
-        <h4 className="text-[11px] font-bold text-[#7c75ff] mb-2.5 pb-2 border-b border-white/[0.04] tracking-[0.12em] uppercase flex items-center gap-1.5 shrink-0">
+      <div className="w-full h-full p-6 flex flex-col relative">
+        <h4 className="text-[13px] font-medium text-[#fc7b43] mb-3 pb-3 border-b border-white/[0.04] tracking-wide uppercase flex items-center gap-2 shrink-0">
           <RiSparklingLine className="text-sm" />
           {data.title}
         </h4>
-        <div className="premium-markdown flex-1 text-[12.5px] leading-[1.7] text-white/60 overflow-y-auto custom-scrollbar pr-2 nodrag nowheel font-light">
+        <div className="premium-markdown flex-1 text-[13.5px] leading-[1.8] text-white/50 overflow-y-auto custom-scrollbar pr-2 nodrag nowheel font-light">
           <MarkdownRenderer content={data.content} />
         </div>
       </div>
@@ -394,12 +381,12 @@ const StatsNode = ({ data }) => {
   return (
     <>
       <Handle type="target" position={Position.Left} className="!opacity-0 !w-0" />
-      <div className="w-[300px] rounded-xl border border-white/[0.06] bg-[#0b0c12] p-5">
-        <div className="text-[10px] text-[#2dd4a0] font-bold uppercase tracking-[0.2em] mb-3 flex items-center gap-1.5">
-          <RiPieChartLine />
+      <div className="w-[300px] rounded-2xl border border-white/[0.03] bg-[#11121A] p-6 shadow-xl">
+        <div className="text-[11px] text-[#fc7b43] font-medium uppercase tracking-[0.15em] mb-4 flex items-center gap-1.5 border-b border-white/[0.04] pb-3">
+          <RiPieChartLine className="text-sm" />
           Supply Data
         </div>
-        <div className="space-y-2.5">
+        <div className="space-y-3">
           {[
             { label: "Circulating", value: fmtSupply(market.circulatingSupply) },
             { label: "Total Supply", value: fmtSupply(market.totalSupply) },
@@ -437,11 +424,11 @@ const StatsNode = ({ data }) => {
           ].map((item) => (
             <div
               key={item.label}
-              className="flex items-center justify-between text-[11px]"
+              className="flex items-center justify-between text-[12px]"
             >
-              <span className="text-white/25 font-medium">{item.label}</span>
+              <span className="text-white/40 font-light">{item.label}</span>
               <span
-                className="font-mono font-semibold text-white/70"
+                className="font-mono font-medium text-white/80"
                 style={{ color: item.color }}
               >
                 {item.value}
@@ -540,8 +527,8 @@ const buildLayout = (analysis, responses, winner, handleVote, voting, voted, mar
       type: "smoothstep",
       animated: isWinnerNode,
       style: {
-        stroke: isWinnerNode ? "#f7c94b" : `${AGENT_MAP[agentId]?.avatarColor || "#7c75ff"}50`,
-        strokeWidth: isWinnerNode ? 3 : 1.5,
+        stroke: isWinnerNode ? "#fc7b43" : `rgba(255,255,255,0.06)`,
+        strokeWidth: isWinnerNode ? 2.5 : 1.5,
       },
     });
 
@@ -549,7 +536,7 @@ const buildLayout = (analysis, responses, winner, handleVote, voting, voted, mar
     const sections = parseMarkdownNodes(resp.content);
     const SEC_X = AGENT_X + 560;
     const COL_GAP = 550;
-    const ROW_GAP = 230;
+    const ROW_GAP = 250;
     const totalRows = Math.ceil(sections.length / 2);
     const startSecY = agentY - (totalRows * ROW_GAP) / 2 + ROW_GAP / 2;
 
@@ -571,8 +558,8 @@ const buildLayout = (analysis, responses, winner, handleVote, voting, voted, mar
         animated: isWinnerNode,
         style: {
           stroke: isWinnerNode
-            ? "rgba(247,201,75,0.3)"
-            : "rgba(255,255,255,0.04)",
+            ? "rgba(252,123,67,0.3)"
+            : "rgba(255,255,255,0.03)",
           strokeWidth: 1.5,
         },
       });
@@ -632,11 +619,11 @@ const FlowMapCanvas = ({
       fitView
       minZoom={0.03}
       maxZoom={1.5}
-      className="bg-[#060710]"
+      className="bg-[#07080F]"
     >
       <Background color="rgba(255,255,255,0.02)" size={1} gap={50} />
       <Controls
-        className="!bg-[#0b0c10] !border !border-white/5 !fill-white !rounded-xl overflow-hidden [&>button]:!bg-[#0a0b12] hover:[&>button]:!bg-white/10 [&>button]:!border-white/5"
+        className="!bg-[#11121A] !border !border-white/[0.03] !fill-white/60 !rounded-xl overflow-hidden [&>button]:!bg-[#11121A] hover:[&>button]:!bg-white/[0.05] hover:[&>button]:!fill-white [&>button]:!border-white/[0.03]"
         showInteractive={false}
       />
     </ReactFlow>
@@ -657,37 +644,32 @@ const DetailPanel = ({ agentSlug, responses, onClose }) => {
       animate={{ x: 0 }}
       exit={{ x: "100%" }}
       transition={{ type: "spring", damping: 30, stiffness: 300 }}
-      className="fixed top-0 right-0 w-full sm:w-[520px] h-full z-[100] bg-[#0a0b12] border-l border-white/[0.06] flex flex-col"
+      className="fixed top-0 right-0 w-full sm:w-[520px] h-full z-[100] bg-[#11121A] border-l border-white/[0.03] flex flex-col"
     >
       {/* Panel header */}
-      <div className="flex items-center gap-3 p-5 border-b border-white/[0.06] shrink-0">
+      <div className="flex items-center gap-4 p-6 border-b border-white/[0.03] shrink-0 bg-[#0A0B14]">
         <div
-          className="w-9 h-9 rounded-lg flex items-center justify-center"
-          style={{
-            background: `linear-gradient(135deg, ${agent.avatarColor}15, ${agent.avatarColor}05)`,
-            border: `1px solid ${agent.avatarColor}30`,
-            color: agent.avatarColor,
-          }}
+          className="w-12 h-12 rounded-xl flex items-center justify-center bg-[#fc7b43]/10 border border-[#fc7b43]/20 text-[#fc7b43]"
         >
           {AGENT_ICONS[agentSlug]}
         </div>
         <div className="flex-1 min-w-0">
-          <h3 className="font-bold text-sm">{agent.name}</h3>
-          <p className="text-[9px] text-white/30 font-mono uppercase tracking-[0.15em]">
+          <h3 className="font-medium text-lg text-white">{agent.name}</h3>
+          <p className="text-[10px] text-[#fc7b43] font-mono uppercase tracking-[0.1em]">
             {agent.type} · {response.content?.split(/\s+/).length || 0} words ·{" "}
             {(response.responseMs / 1000).toFixed(1)}s
           </p>
         </div>
         <button
           onClick={onClose}
-          className="w-8 h-8 rounded-lg bg-white/[0.04] border border-white/[0.06] flex items-center justify-center text-white/40 hover:text-white/70 hover:bg-white/[0.08] transition-colors cursor-pointer"
+          className="w-10 h-10 rounded-xl bg-white/[0.02] border border-white/[0.04] flex items-center justify-center text-white/50 hover:text-white hover:bg-white/[0.06] transition-colors cursor-pointer"
         >
-          <RiCloseLine className="text-lg" />
+          <RiCloseLine className="text-xl" />
         </button>
       </div>
 
       {/* Panel body */}
-      <div className="flex-1 overflow-y-auto p-5 custom-scrollbar">
+      <div className="flex-1 overflow-y-auto p-6 custom-scrollbar">
         <MarkdownRenderer content={response.content} />
       </div>
     </motion.div>
@@ -917,11 +899,11 @@ export default function InfiniteComparisonPage({ params }) {
 
   if (loading) {
     return (
-      <div className="fixed inset-0 bg-[#060710] flex items-center justify-center">
+      <div className="fixed inset-0 bg-[#07080F] flex items-center justify-center">
         <div className="text-center">
           <LoadingSpinner size="lg" className="mx-auto mb-4" />
-          <p className="text-white/25 text-xs font-mono tracking-[0.2em] uppercase">
-            Connecting to Intelligence Core...
+          <p className="text-[#fc7b43]/50 text-[10px] font-mono tracking-[0.2em] uppercase">
+            Connecting to Taskora Intelligence Core...
           </p>
         </div>
       </div>
@@ -930,12 +912,12 @@ export default function InfiniteComparisonPage({ params }) {
 
   if (!analysis) {
     return (
-      <div className="fixed inset-0 bg-[#060710] flex items-center justify-center">
-        <div className="text-center p-8 bg-[#0b0c12] rounded-2xl border border-white/[0.06] max-w-sm">
-          <p className="text-white/50 mb-4 text-sm">Analysis not found</p>
+      <div className="fixed inset-0 bg-[#07080F] flex items-center justify-center">
+        <div className="text-center p-8 bg-[#11121A] rounded-2xl border border-white/[0.03] max-w-sm shadow-xl">
+          <p className="text-white/50 mb-5 text-sm font-light">Analysis not found or expired.</p>
           <Link
             href="/arena"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white/[0.04] border border-white/[0.06] text-white/50 text-sm"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white/[0.03] border border-white/[0.05] text-white/70 text-sm hover:bg-white/[0.06] transition-colors"
           >
             <RiArrowLeftLine />
             Back to Arena
@@ -946,7 +928,7 @@ export default function InfiniteComparisonPage({ params }) {
   }
 
   return (
-    <div className="fixed inset-0 bg-[#060710] w-screen h-screen overflow-hidden">
+    <div className="fixed inset-0 bg-[#07080F] w-screen h-screen overflow-hidden">
       {/* Global CSS */}
       <style jsx global>{`
         .custom-scrollbar::-webkit-scrollbar {
@@ -956,24 +938,24 @@ export default function InfiniteComparisonPage({ params }) {
           background: transparent;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb {
-          background: rgba(255, 255, 255, 0.08);
+          background: rgba(255, 255, 255, 0.05);
           border-radius: 10px;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-          background: rgba(124, 117, 255, 0.3);
+          background: rgba(252, 123, 67, 0.3);
         }
         .react-flow__node {
           cursor: default;
         }
         .premium-markdown .prose strong {
           color: #fff;
-          font-weight: 600;
-          background: rgba(124, 117, 255, 0.1);
+          font-weight: 500;
+          background: rgba(252, 123, 67, 0.1);
           padding: 1px 5px;
           border-radius: 4px;
         }
         .premium-markdown .prose ul > li::marker {
-          color: #2dd4a0;
+          color: #fc7b43;
         }
         .premium-markdown .prose p {
           margin-bottom: 0.5em;
@@ -986,21 +968,21 @@ export default function InfiniteComparisonPage({ params }) {
         <div className="pointer-events-auto">
           <Link
             href="/arena"
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#0a0b12]/90 backdrop-blur-2xl border border-white/[0.06] text-white/40 hover:text-white/70 transition-all text-[10px] font-mono uppercase tracking-[0.15em] font-semibold"
+            className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-[#11121A]/90 backdrop-blur-2xl border border-white/[0.03] text-white/50 hover:text-white transition-all text-[11px] font-mono uppercase tracking-[0.15em] font-medium shadow-lg"
           >
             <RiArrowLeftLine />
-            Arena
+            Back
           </Link>
         </div>
 
         {/* Right: Status + Actions */}
-        <div className="flex items-center gap-2 pointer-events-auto">
+        <div className="flex items-center gap-3 pointer-events-auto">
           {/* View toggle */}
           <button
             onClick={() =>
               setViewMode(viewMode === "canvas" ? "cards" : "canvas")
             }
-            className="flex items-center gap-1.5 px-3 py-2.5 rounded-xl bg-[#0a0b12]/90 backdrop-blur-2xl border border-white/[0.06] text-white/40 hover:text-white/70 transition-all text-[10px] font-mono uppercase tracking-[0.12em] cursor-pointer"
+            className="flex items-center gap-1.5 px-4 py-3 rounded-xl bg-[#11121A]/90 backdrop-blur-2xl border border-white/[0.03] text-white/50 hover:text-white transition-all text-[11px] font-mono uppercase tracking-[0.12em] cursor-pointer shadow-lg"
           >
             {viewMode === "canvas" ? (
               <>
@@ -1018,16 +1000,16 @@ export default function InfiniteComparisonPage({ params }) {
           {/* Share */}
           <button
             onClick={handleShare}
-            className="flex items-center gap-1.5 px-3 py-2.5 rounded-xl bg-[#0a0b12]/90 backdrop-blur-2xl border border-white/[0.06] text-white/40 hover:text-white/70 transition-all text-[10px] font-mono uppercase tracking-[0.12em] cursor-pointer"
+            className="flex items-center gap-1.5 px-4 py-3 rounded-xl bg-[#11121A]/90 backdrop-blur-2xl border border-white/[0.03] text-white/50 hover:text-white transition-all text-[11px] font-mono uppercase tracking-[0.12em] cursor-pointer shadow-lg"
           >
             <RiShareLine />
             Share
           </button>
 
           {/* Status */}
-          <div className="hidden sm:flex items-center gap-1.5 px-3 py-2.5 rounded-xl bg-[#0a0b12]/90 backdrop-blur-2xl border border-[#7c75ff]/20 text-[#7c75ff] text-[10px] font-bold tracking-[0.15em] uppercase">
-            <RiCheckboxCircleLine />
-            Online
+          <div className="hidden sm:flex items-center gap-2 px-4 py-3 rounded-xl bg-[#11121A]/90 backdrop-blur-2xl border border-[#fc7b43]/20 text-[#fc7b43] text-[11px] font-medium tracking-[0.15em] uppercase shadow-lg">
+            <RiCheckboxCircleLine className="text-sm" />
+            Active
           </div>
         </div>
       </div>
@@ -1039,12 +1021,12 @@ export default function InfiniteComparisonPage({ params }) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
-            className="absolute bottom-5 left-5 z-50 pointer-events-auto"
+            className="absolute bottom-6 left-6 z-50 pointer-events-auto"
           >
-            <div className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#0a0b12]/90 backdrop-blur-2xl border border-[#f7c94b]/25">
-              <RiTrophyLine className="text-[#f7c94b]" />
-              <span className="text-[10px] font-bold text-[#f7c94b] uppercase tracking-[0.15em]">
-                {AGENT_MAP[winner]?.name}
+            <div className="flex items-center gap-2 px-5 py-3 rounded-xl bg-[#11121A]/95 backdrop-blur-2xl border border-[#fc7b43]/30 shadow-[0_0_30px_rgba(252,123,67,0.15)]">
+              <RiTrophyLine className="text-[#fc7b43] text-lg" />
+              <span className="text-[11px] font-bold text-[#fc7b43] uppercase tracking-[0.15em]">
+                {AGENT_MAP[winner]?.name} Won
               </span>
             </div>
           </motion.div>
