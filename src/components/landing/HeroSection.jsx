@@ -77,7 +77,7 @@ export default function HeroSection() {
               </button>
             </Link>
             
-            <Link href="#features" className="w-full sm:w-auto">
+            <Link href="https://tsrkai.gitbook.io/tsrkai-docs" target="_blank" className="w-full sm:w-auto">
               <button className="group relative inline-flex items-center justify-center gap-2 px-8 sm:px-10 py-4 rounded-xl bg-[#E8EAF0] text-[#07080F] font-medium text-[1.05rem] sm:text-lg transition-all duration-300 shadow-[inset_0_-3px_10px_rgba(0,0,0,0.06),0_4px_20px_rgba(255,255,255,0.03)] hover:bg-white hover:scale-[1.02] active:scale-[0.98] w-full sm:w-auto">
                 Explore
               </button>
