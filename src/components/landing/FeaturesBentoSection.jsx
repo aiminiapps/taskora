@@ -20,7 +20,7 @@ const fadeUp = {
 
 export default function FeaturesBentoSection() {
   return (
-    <section className="py-24 sm:py-32 relative overflow-hidden">
+    <section className="py-24 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header */}
@@ -31,11 +31,6 @@ export default function FeaturesBentoSection() {
           viewport={{ once: true, margin: "-100px" }}
           variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
         >
-          <motion.div variants={fadeUp} className="mb-6">
-            <span className="inline-flex items-center px-4 py-1.5 rounded-full bg-[#22D3EE]/[0.08] border border-[#22D3EE]/15 text-[#67E8F9] text-xs font-semibold tracking-wider uppercase">
-              Features
-            </span>
-          </motion.div>
           <motion.h2 
             variants={fadeUp}
             className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.12] mb-6 text-white"
@@ -46,10 +41,10 @@ export default function FeaturesBentoSection() {
           </motion.h2>
           <motion.p 
             variants={fadeUp}
-            className="text-base sm:text-lg text-white/35 leading-relaxed max-w-2xl mx-auto"
+            className="text-base sm:text-lg text-balance text-white/35 leading-relaxed max-w-2xl mx-auto"
           >
             Taskora combines AI-driven intelligent analysis with
-            an effortless experience — so you can focus on what matters.
+            an effortless experience so you can focus on what matters.
           </motion.p>
         </motion.div>
 
