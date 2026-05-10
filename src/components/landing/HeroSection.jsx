@@ -42,7 +42,7 @@ export default function HeroSection() {
             <span className="inline-flex items-center justify-center w-14 h-14 sm:w-[76px] sm:h-[76px] rounded-[20px] sm:rounded-[28px] bg-gradient-to-b from-[#1C1E2A] to-[#0A0B14] border border-white/[0.06] shadow-[inset_0_1px_1px_rgba(255,255,255,0.1),0_12px_40px_rgba(0,0,0,0.6)] mx-3 sm:mx-5 align-middle -translate-y-1 sm:-translate-y-2 transition-transform duration-500 hover:scale-[1.05]">
               <RiSparklingLine className="text-[1.75rem] sm:text-[44px] text-[#fc7b43]" />
             </span>
-            Crypto Investing.
+            Crypto Investing
             <br />
             AI Intelligence.
           </motion.h1>
@@ -64,12 +64,12 @@ export default function HeroSection() {
             className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6"
           >
             <Link href="/arena" className="w-full sm:w-auto">
-              <button className="group relative inline-flex items-center justify-center p-[2px] rounded-xl overflow-hidden transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] w-full sm:w-auto hover:shadow-[0_0_40px_rgba(252,123,67,0.3)]">
+              <button className="group relative inline-flex items-center justify-center p-[2px] rounded-xl overflow-hidden transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] w-full sm:w-auto ">
                 {/* Moving Gradient Border */}
                 <span className="absolute inset-0 bg-[linear-gradient(90deg,#fc7b43,#ffb088,#fc7b43,#ffb088)] bg-[length:300%_100%] animate-[shimmer_3s_linear_infinite] group-hover:animate-[shimmer_1.5s_linear_infinite]" />
                 
                 {/* Inner Content */}
-                <span className="relative flex items-center justify-center gap-3 px-8 sm:px-10 py-4 rounded-[10px] bg-gradient-to-b from-[#1C1E2A] to-[#0A0B14] shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)] text-white font-medium text-[1.05rem] sm:text-lg w-full h-full transition-all duration-300 group-hover:from-[#252838] group-hover:to-[#10121C]">
+                <span className="relative flex items-center justify-center gap-3 px-8 sm:px-10 py-4 rounded-xl bg-gradient-to-b from-[#1C1E2A] to-[#0A0B14] shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)] text-white font-medium text-[1.05rem] sm:text-lg w-full h-full transition-all duration-300 group-hover:from-[#252838] group-hover:to-[#10121C]">
                   <RiSwordLine className="text-xl sm:text-[1.35rem] text-[#fc7b43] drop-shadow-[0_0_8px_rgba(252,123,67,0.6)]" />
                   <span className="tracking-wide">Enter the Arena</span>
                   <RiArrowRightLine className="text-xl sm:text-[1.35rem] text-white/40 group-hover:text-[#fc7b43] group-hover:translate-x-1 transition-all" />
