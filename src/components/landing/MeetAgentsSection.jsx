@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { 
   RiArrowRightLine, 
@@ -17,56 +18,46 @@ const getAgentIcon = (slug) => {
   return RiMicroscopeLine;
 };
 
-const agentColors = {
-  research: "#8B5CF6",
-  market: "#FB923C",
-  risk: "#22D3EE",
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+  },
 };
 
 export default function MeetAgentsSection() {
   return (
-    <section className="py-24 sm:py-32 relative overflow-hidden">
+    <section className="py-24 relative overflow-hidden bg-[#07080F]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="md:w-1/2"
+        <motion.div
+          className="text-center mb-16 max-w-3xl mx-auto"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
+        >
+          <motion.h2 
+            variants={fadeUp}
+            className="text-3xl sm:text-4xl lg:text-[2.5rem] font-medium tracking-tight leading-[1.2] mb-4 text-white"
           >
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight leading-tight">
-              The Intelligence Behind<br />Every Decision
-            </h2>
-          </motion.div>
-          
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="md:w-1/3 flex flex-col items-start md:items-end text-left md:text-right"
+            Meet your intelligence team
+          </motion.h2>
+          <motion.p 
+            variants={fadeUp}
+            className="text-sm sm:text-base text-white/40 leading-relaxed max-w-2xl mx-auto font-light"
           >
-            <p className="text-white/35 text-sm leading-relaxed mb-6">
-              Three specialized autonomous agents working in tandem — fundamental research, technical analysis, and security risk assessment.
-            </p>
-            <Link 
-              href="/arena" 
-              className="flex items-center gap-2 text-[#A78BFA] font-medium hover:text-[#8B5CF6] transition-colors group text-sm uppercase tracking-widest"
-            >
-              Meet The Agents
-              <RiArrowRightLine className="group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </motion.div>
-        </div>
+            Three specialized autonomous agents working in tandem — fundamental research, technical analysis, and security risk assessment.
+          </motion.p>
+        </motion.div>
 
         {/* Agents Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
           {AGENTS.map((agent, i) => {
             const Icon = getAgentIcon(agent.slug);
-            const color = agentColors[agent.slug] || agent.avatarColor;
             
             return (
               <motion.div
@@ -74,44 +65,54 @@ export default function MeetAgentsSection() {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.15 }}
+                transition={{ duration: 0.6, delay: i * 0.15 }}
+                className="h-full"
               >
                 <Link href={`/agents/${agent.slug}`} className="block h-full">
-                  <div className="relative h-[400px] rounded-3xl transition-all duration-500 cursor-pointer overflow-hidden group bg-[#0C0D18]/60 border border-white/[0.05] hover:border-white/[0.1] hover:shadow-2xl hover:-translate-y-2">
-                    {/* Dot Grid */}
-                    <div className="absolute inset-0 opacity-[0.04] group-hover:opacity-[0.08] transition-opacity duration-700" 
-                         style={{ backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)", backgroundSize: "28px 28px" }} />
-
-                    {/* Concentric Rings */}
-                    <div className="absolute top-[36%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] rounded-full border border-white/[0.02] group-hover:border-white/[0.05] transition-colors duration-500 pointer-events-none" />
-                    <div className="absolute top-[36%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] h-[320px] rounded-full border border-white/[0.01] group-hover:border-white/[0.03] transition-colors duration-500 pointer-events-none" />
-
-                    {/* Aura Gradient */}
-                    <div className="absolute top-[36%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 pointer-events-none">
-                      <div className="absolute inset-0 blur-[50px] scale-[2.5] transition-opacity duration-700 opacity-20 group-hover:opacity-70"
-                           style={{ backgroundColor: color }} />
-                    </div>
-
-                    {/* Glass Icon Box */}
-                    <div className="absolute top-[36%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
-                      <div className="relative w-20 h-20 rounded-2xl flex items-center justify-center border bg-[#0C0D18]/60 backdrop-blur-xl transition-all duration-500 group-hover:scale-110"
-                           style={{ 
-                             borderColor: `${color}30`,
-                             boxShadow: `inset 0 0 24px ${color}10, 0 8px 32px ${color}20`
-                           }}>
-                         <Icon className="text-[36px] transition-transform duration-500 group-hover:scale-110 drop-shadow-[0_0_12px_currentColor]" style={{ color }} />
+                  <div className="bg-[#11121A] rounded-[2rem] p-6 sm:p-8 flex flex-col h-full border border-white/[0.03] hover:border-white/[0.1] hover:bg-[#15161E] transition-all duration-300 group">
+                    
+                    {/* Visual Container */}
+                    <div className="relative w-full h-[220px] mb-8 bg-[#0C0D18] rounded-[1.5rem] border border-white/[0.03] flex items-center justify-center overflow-hidden">
+                      {/* Subtle Background Pattern */}
+                      <div className="absolute inset-0 opacity-[0.03] group-hover:opacity-[0.06] transition-opacity duration-500" 
+                           style={{ backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)", backgroundSize: "20px 20px" }} />
+                      
+                      {/* Agent Avatar */}
+                      <Image 
+                        src="/agent.png" 
+                        alt={agent.name} 
+                        width={110} 
+                        height={110} 
+                        className="object-contain opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]" 
+                      />
+                      
+                      {/* Top Right Icon Badge */}
+                      <div className="absolute top-4 right-4 w-8 h-8 rounded-[10px] bg-[#fc7b43]/10 border border-[#fc7b43]/20 flex items-center justify-center shadow-[0_0_15px_rgba(252,123,67,0.1)]">
+                        <Icon className="text-[#fc7b43] text-[13px]" />
                       </div>
                     </div>
 
-                    {/* Bottom Content Card */}
-                    <div className="absolute bottom-3 left-3 right-3 bg-[#0C0D18]/80 backdrop-blur-2xl border border-white/[0.05] rounded-2xl p-5 z-30 transition-transform duration-500 group-hover:-translate-y-1 shadow-[0_12px_32px_rgba(0,0,0,0.5)] flex flex-col items-center justify-center text-center">
-                      <h3 className="text-base font-semibold mb-2 tracking-tight" style={{ color }}>
-                        {agent.name}
-                      </h3>
-                      <p className="text-white/35 text-[13px] leading-relaxed">
+                    {/* Content */}
+                    <div className="flex flex-col flex-1">
+                      <div className="flex items-center gap-3 mb-3">
+                        <h3 className="text-white font-medium text-xl tracking-tight">
+                          {agent.name}
+                        </h3>
+                        <span className="text-[#fc7b43] text-[9px] font-mono uppercase tracking-wider bg-[#fc7b43]/10 px-2 py-0.5 rounded border border-[#fc7b43]/20">
+                          Active
+                        </span>
+                      </div>
+                      
+                      <p className="text-white/40 text-[13px] sm:text-sm leading-relaxed font-light mb-6 flex-1">
                         {agent.specialty}
                       </p>
+
+                      <div className="flex items-center gap-2 text-white/50 text-sm group-hover:text-[#fc7b43] transition-colors mt-auto font-medium">
+                        View Intel
+                        <RiArrowRightLine className="transition-transform group-hover:translate-x-1" />
+                      </div>
                     </div>
+
                   </div>
                 </Link>
               </motion.div>
