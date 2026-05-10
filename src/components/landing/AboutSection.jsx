@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { RiEarthLine } from "react-icons/ri";
-import { ComposableMap, Geographies, Geography, Marker, Line } from "react-simple-maps";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -19,16 +18,6 @@ const fadeUp = {
 
 // TopoJSON map data
 const geoUrl = "/features.json";
-
-// Major hub coordinates for the network map
-const markers = [
-  { name: "New York", coordinates: [-74.006, 40.7128], color: "#7c75ff" },
-  { name: "London", coordinates: [-0.1276, 51.5072], color: "#2dd4a0" },
-  { name: "Tokyo", coordinates: [139.6917, 35.6895], color: "#f7c94b" },
-  { name: "Singapore", coordinates: [103.8198, 1.3521], color: "#7c75ff" },
-  { name: "Dubai", coordinates: [55.2708, 25.2048], color: "#2dd4a0" },
-  { name: "San Francisco", coordinates: [-122.4194, 37.7749], color: "#f7c94b" },
-];
 
 // Arcs connecting the hubs
 const lines = [
@@ -124,93 +113,6 @@ export default function AboutSection() {
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           >
             <div className="absolute inset-0 w-[140%] h-[140%] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" style={{ mixBlendMode: "screen" }}>
-              <ComposableMap
-                projection="geoEquirectangular"
-                projectionConfig={{ scale: 220, center: [20, 10] }}
-                className="w-full h-full object-cover"
-              >
-                {/* Custom Dot Pattern and Glow Gradients */}
-                <defs>
-                  <pattern id="dotPattern" x="0" y="0" width="7" height="7" patternUnits="userSpaceOnUse">
-                    <circle cx="3.5" cy="3.5" r="1.5" fill="#5F718B" opacity="0.4" />
-                  </pattern>
-                  <linearGradient id="arcGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="#7c75ff" stopOpacity="0" />
-                    <stop offset="50%" stopColor="#2dd4a0" stopOpacity="1" />
-                    <stop offset="100%" stopColor="#7c75ff" stopOpacity="0" />
-                  </linearGradient>
-                  <linearGradient id="arcGlow" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="#7c75ff" />
-                    <stop offset="100%" stopColor="#2dd4a0" />
-                  </linearGradient>
-                </defs>
-
-                <Geographies geography={geoUrl}>
-                  {({ geographies }) =>
-                    geographies.map((geo) => (
-                      <Geography
-                        key={geo.rsmKey}
-                        geography={geo}
-                        // Use the dot pattern to fill the countries, creating the "Dot Map" effect
-                        fill="url(#dotPattern)"
-                        stroke="rgba(255, 255, 255, 0.05)"
-                        strokeWidth={0.5}
-                        style={{
-                          default: { outline: "none" },
-                          hover: { outline: "none" },
-                          pressed: { outline: "none" },
-                        }}
-                      />
-                    ))
-                  }
-                </Geographies>
-
-                {/* Animated Connecting Arcs */}
-                {lines.map((line, i) => (
-                  <g key={`line-group-${i}`}>
-                    {/* Glow aura */}
-                    <Line
-                      from={line.from}
-                      to={line.to}
-                      stroke="url(#arcGlow)"
-                      strokeWidth={2}
-                      strokeLinecap="round"
-                      opacity="0.15"
-                      style={{ filter: "blur(4px)" }}
-                    />
-                    {/* The traveling beam */}
-                    <Line
-                      from={line.from}
-                      to={line.to}
-                      stroke="url(#arcGradient)"
-                      strokeWidth={1.5}
-                      strokeLinecap="round"
-                      className={`animated-arc-${i % 2 === 0 ? 'fast' : 'slow'}`}
-                    />
-                  </g>
-                ))}
-
-                {/* Active Hub Markers Matching Reference */}
-                {markers.map(({ name, coordinates, color }) => (
-                  <Marker key={name} coordinates={coordinates}>
-                    {/* Shadow Pill Backdrop for Label */}
-                    <rect x="0" y="-12" width="65" height="24" rx="12" fill="#000000" opacity="0.6" />
-                    
-                    {/* The Badge Text */}
-                    <text x="24" y="3" fontSize={11} fill="#e2e8f0" fontWeight={500} style={{ pointerEvents: "none" }}>
-                      {name === "San Francisco" ? "SF" : name}
-                    </text>
-
-                    {/* Outer Ping Ring */}
-                    <circle r={10} fill="none" stroke="#e85d04" strokeWidth="1" className="animate-ping" style={{ animationDuration: "2s" }} />
-                    <circle r={10} fill="none" stroke="#e85d04" strokeWidth="2" opacity="0.8" />
-                    
-                    {/* Inner Graphic - Emulate Flag Style */}
-                    <circle r={7} fill="#1a202c" stroke="#e85d04" strokeWidth="1" />
-                    <circle r={3} fill="#a0aec0" />
-                  </Marker>
-                ))}
-              </ComposableMap>
 
             </div>
           </motion.div>
