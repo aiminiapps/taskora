@@ -100,13 +100,13 @@ export default function Navbar() {
                           : "text-white/45 group-hover:text-white/80"
                       )}
                     >
-                      <link.icon className={cn("text-[15px]", isActive ? "text-[#8B5CF6]" : "")} />
+                      <link.icon className={cn("text-[15px]", isActive ? "text-[#fc7b43]" : "")} />
                       {link.label}
                     </span>
                     {isActive && (
                       <motion.div
                         layoutId="nav-pill"
-                        className="absolute inset-0 bg-[#8B5CF6]/10 border border-[#8B5CF6]/20 rounded-lg -z-0"
+                        className="absolute inset-0 bg-[#fc7b43]/10 border border-[#fc7b43]/20 rounded-lg -z-0"
                         transition={{
                           type: "spring",
                           stiffness: 400,
@@ -136,8 +136,8 @@ export default function Navbar() {
                 className={cn(
                   "flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300 cursor-pointer",
                   isConnected
-                    ? "bg-[#8B5CF6]/10 border border-[#8B5CF6]/20 text-[#A78BFA] hover:bg-[#8B5CF6]/15 hover:border-[#8B5CF6]/30"
-                    : "bg-gradient-to-r from-[#8B5CF6] to-[#7C3AED] text-white hover:opacity-90 shadow-lg shadow-[#8B5CF6]/20"
+                    ? "bg-[#fc7b43]/10 border border-[#fc7b43]/20 text-white hover:bg-[#fc7b43]/15 hover:border-[#fc7b43]/30"
+                    : "bg-gradient-to-r from-[#fc7b43] to-[#fc7b43] text-white hover:opacity-90 shadow-lg shadow-[#fc7b43]/20"
                 )}
               >
                 <RiWallet3Line className="text-base" />
@@ -192,11 +192,11 @@ export default function Navbar() {
                           className={cn(
                             "flex items-center gap-3 p-4 rounded-xl text-lg font-medium transition-colors",
                             isActive
-                              ? "bg-[#8B5CF6]/10 text-white border border-[#8B5CF6]/15"
+                              ? "bg-[#fc7b43]/10 text-white border border-[#fc7b43]/15"
                               : "text-white/50 hover:text-white hover:bg-white/[0.03]"
                           )}
                         >
-                          <div className={cn("w-10 h-10 rounded-lg flex items-center justify-center", isActive ? "bg-[#8B5CF6]/20 text-[#A78BFA]" : "bg-white/[0.04]")}>
+                          <div className={cn("w-10 h-10 rounded-lg flex items-center justify-center", isActive ? "bg-[#fc7b43]/20 text-[#A78BFA]" : "bg-white/[0.04]")}>
                              <link.icon className="text-xl" />
                           </div>
                           {link.label}
