@@ -61,36 +61,36 @@ function CoinSearchInput({ label, side, onSelect, selectedCoin }) {
     return () => document.removeEventListener("mousedown", handler);
   }, [setShow]);
 
-  const sideColor = side === "a" ? "#7c75ff" : "#f7c94b";
+  const sideColor = side === "a" ? "#fc7b43" : "#22D3EE";
 
   return (
     <div ref={ref} className="relative">
       <label
-        className="text-[10px] uppercase tracking-[0.2em] font-semibold mb-2 block"
-        style={{ color: `${sideColor}80` }}
+        className="text-[11px] uppercase tracking-[0.15em] font-medium mb-3 block"
+        style={{ color: `${sideColor}` }}
       >
         {label}
       </label>
       {selectedCoin ? (
         <div
-          className="flex items-center gap-3 p-3.5 rounded-xl border bg-[#0b0c12]"
-          style={{ borderColor: `${sideColor}25` }}
+          className="flex items-center gap-4 p-4 rounded-2xl border bg-[#11121A] shadow-lg transition-all"
+          style={{ borderColor: `${sideColor}30` }}
         >
           {selectedCoin.image && (
-            <img src={selectedCoin.image} alt="" className="w-7 h-7 rounded-full" />
+            <img src={selectedCoin.image} alt="" className="w-8 h-8 rounded-full" />
           )}
           <div className="flex-1">
-            <p className="text-sm font-semibold">{selectedCoin.name}</p>
-            <p className="text-[10px] font-mono text-white/30">
+            <p className="text-[15px] font-medium text-white tracking-tight">{selectedCoin.name}</p>
+            <p className="text-[11px] font-mono text-white/40 mt-0.5">
               {selectedCoin.symbol}
               {selectedCoin.rank ? ` · #${selectedCoin.rank}` : ""}
             </p>
           </div>
           <button
             onClick={() => onSelect(null)}
-            className="w-7 h-7 rounded-lg bg-white/[0.04] border border-white/[0.06] flex items-center justify-center text-white/30 hover:text-white/60 cursor-pointer transition-colors"
+            className="w-8 h-8 rounded-xl bg-white/[0.02] border border-white/[0.04] flex items-center justify-center text-white/40 hover:text-white hover:bg-white/[0.06] hover:border-white/[0.1] cursor-pointer transition-all"
           >
-            <RiCloseLine className="text-xs" />
+            <RiCloseLine className="text-base" />
           </button>
         </div>
       ) : (
@@ -100,7 +100,7 @@ function CoinSearchInput({ label, side, onSelect, selectedCoin }) {
             placeholder="Search token..."
             value={query}
             onChange={(e) => search(e.target.value)}
-            className="w-full px-4 py-3 rounded-xl bg-white/[0.02] border border-white/[0.06] text-white placeholder-white/20 focus:outline-none text-sm transition-all"
+            className="w-full px-5 py-4 rounded-2xl bg-[#11121A] border border-white/[0.03] text-white placeholder-white/30 focus:outline-none focus:border-[#fc7b43]/50 focus:ring-1 focus:ring-[#fc7b43]/50 text-sm transition-all shadow-lg"
             onFocus={() => setShow(true)}
           />
           <AnimatePresence>
@@ -109,11 +109,11 @@ function CoinSearchInput({ label, side, onSelect, selectedCoin }) {
                 initial={{ opacity: 0, y: -5 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -5 }}
-                className="absolute z-50 w-full mt-1 bg-[#0d0f1a] border border-white/10 rounded-xl overflow-hidden py-1"
+                className="absolute z-50 w-full mt-2 bg-[#0A0B14] border border-white/[0.04] rounded-2xl overflow-hidden py-2 shadow-2xl"
               >
                 {searching ? (
-                  <li className="px-4 py-3 text-xs text-white/30 text-center animate-pulse">
-                    Searching...
+                  <li className="px-5 py-4 text-[13px] text-white/40 text-center animate-pulse font-light">
+                    Searching Data...
                   </li>
                 ) : (
                   results.map((coin) => (
@@ -154,11 +154,11 @@ function CoinSearchInput({ label, side, onSelect, selectedCoin }) {
                           });
                         }
                       }}
-                      className="px-4 py-2.5 hover:bg-white/[0.04] cursor-pointer flex items-center gap-3 transition-colors"
+                      className="px-5 py-3 hover:bg-white/[0.03] cursor-pointer flex items-center gap-4 transition-colors"
                     >
-                      <img src={coin.thumb} alt="" className="w-5 h-5 rounded-full" />
-                      <span className="text-sm text-white/80">{coin.name}</span>
-                      <span className="text-[10px] font-mono text-white/30 uppercase">
+                      <img src={coin.thumb} alt="" className="w-6 h-6 rounded-full" />
+                      <span className="text-[14px] text-white/90 font-medium">{coin.name}</span>
+                      <span className="text-[11px] font-mono text-[#fc7b43] uppercase">
                         {coin.symbol}
                       </span>
                     </li>
@@ -257,28 +257,28 @@ function ScoreBar({ coinA, coinB }) {
   const pctB = 100 - pctA;
 
   return (
-    <div className="flex items-center gap-3 mb-6">
-      <div className="flex items-center gap-2 text-xs font-mono">
-        {coinA.image && <img src={coinA.image} alt="" className="w-4 h-4 rounded-full" />}
-        <span className="text-[#7c75ff] font-bold">{winsA}</span>
+    <div className="flex items-center gap-4 mb-8 mt-4">
+      <div className="flex items-center gap-2 text-sm font-mono">
+        {coinA.image && <img src={coinA.image} alt="" className="w-6 h-6 rounded-full border border-[#fc7b43]/30" />}
+        <span className="text-[#fc7b43] font-bold ml-1">{winsA}</span>
       </div>
-      <div className="flex-1 h-2 bg-white/[0.04] rounded-full overflow-hidden flex">
+      <div className="flex-1 h-3 bg-[#11121A] border border-white/[0.03] rounded-full overflow-hidden flex shadow-inner">
         <motion.div
           initial={{ width: 0 }}
           animate={{ width: `${pctA}%` }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="h-full bg-gradient-to-r from-[#7c75ff] to-[#7c75ff]/60 rounded-l-full"
+          className="h-full bg-gradient-to-r from-[#fc7b43] to-[#fc7b43]/70 rounded-l-full"
         />
         <motion.div
           initial={{ width: 0 }}
           animate={{ width: `${pctB}%` }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
-          className="h-full bg-gradient-to-l from-[#f7c94b] to-[#f7c94b]/60 rounded-r-full"
+          className="h-full bg-gradient-to-l from-[#22D3EE] to-[#22D3EE]/70 rounded-r-full"
         />
       </div>
-      <div className="flex items-center gap-2 text-xs font-mono">
-        <span className="text-[#f7c94b] font-bold">{winsB}</span>
-        {coinB.image && <img src={coinB.image} alt="" className="w-4 h-4 rounded-full" />}
+      <div className="flex items-center gap-2 text-sm font-mono">
+        <span className="text-[#22D3EE] font-bold mr-1">{winsB}</span>
+        {coinB.image && <img src={coinB.image} alt="" className="w-6 h-6 rounded-full border border-[#22D3EE]/30" />}
       </div>
     </div>
   );
@@ -339,18 +339,18 @@ export default function ComparePage() {
 
   return (
     <AppShell>
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 py-12 md:py-16">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-8"
+          className="text-center mb-12"
         >
-          <h1 className="text-2xl sm:text-3xl font-bold mb-2 tracking-tight">
-            Compare <span className="text-gradient">Tokens</span>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight">
+            Compare <span className="text-[#fc7b43]">Tokens</span>
           </h1>
-          <p className="text-white/30 text-sm font-light">
-            Side-by-side market data and AI-powered investment comparison
+          <p className="text-white/40 text-base md:text-lg max-w-2xl mx-auto font-light leading-relaxed">
+            Side-by-side market data and AI-powered investment comparison powered by Taskora Intelligence.
           </p>
         </motion.div>
 
@@ -359,7 +359,7 @@ export default function ComparePage() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8"
+          className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10"
         >
           <CoinSearchInput label="Token A" side="a" onSelect={setCoinA} selectedCoin={coinA} />
           <CoinSearchInput label="Token B" side="b" onSelect={setCoinB} selectedCoin={coinB} />
@@ -371,34 +371,34 @@ export default function ComparePage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 10 }}
-              className="space-y-6"
+              className="space-y-8"
             >
               {/* Score Bar */}
               <ScoreBar coinA={coinA} coinB={coinB} />
 
               {/* Comparison Table */}
-              <div className="rounded-2xl bg-[#0b0c12] border border-white/[0.06] overflow-hidden">
+              <div className="rounded-2xl bg-[#11121A] border border-white/[0.03] overflow-hidden shadow-2xl">
                 {/* Header row */}
-                <div className="flex items-center gap-3 p-4 sm:p-5 border-b border-white/[0.06]">
-                  <div className="flex-1 flex items-center gap-2 justify-end">
+                <div className="flex items-center gap-3 p-5 sm:p-6 border-b border-white/[0.04] bg-[#0A0B14]">
+                  <div className="flex-1 flex items-center gap-3 justify-end">
                     {coinA.image && (
-                      <img src={coinA.image} alt="" className="w-6 h-6 rounded-full" />
+                      <img src={coinA.image} alt="" className="w-8 h-8 rounded-full" />
                     )}
-                    <span className="text-sm font-bold">{coinA.symbol}</span>
+                    <span className="text-base font-bold text-white">{coinA.symbol}</span>
                   </div>
                   <div className="w-28 sm:w-36 text-center shrink-0">
-                    <RiArrowLeftRightLine className="text-white/15 mx-auto text-lg" />
+                    <RiArrowLeftRightLine className="text-white/20 mx-auto text-2xl" />
                   </div>
-                  <div className="flex-1 flex items-center gap-2">
+                  <div className="flex-1 flex items-center gap-3">
                     {coinB.image && (
-                      <img src={coinB.image} alt="" className="w-6 h-6 rounded-full" />
+                      <img src={coinB.image} alt="" className="w-8 h-8 rounded-full" />
                     )}
-                    <span className="text-sm font-bold">{coinB.symbol}</span>
+                    <span className="text-base font-bold text-white">{coinB.symbol}</span>
                   </div>
                 </div>
 
                 {/* Metrics */}
-                <div className="px-4 sm:px-5 py-2">
+                <div className="px-5 sm:px-6 py-3">
                   <CompareMetric label="Rank" valueA={coinA.rank ? `#${coinA.rank}` : null} valueB={coinB.rank ? `#${coinB.rank}` : null} icon={RiTrophyLine} />
                   <CompareMetric label="Price" valueA={coinA.price} valueB={coinB.price} format="price" icon={RiCoinLine} />
                   <CompareMetric label="24h" valueA={coinA.change24h} valueB={coinB.change24h} format="percent" icon={RiExchangeDollarLine} />
@@ -414,43 +414,43 @@ export default function ComparePage() {
               </div>
 
               {/* AI Analysis Panel */}
-              <div className="rounded-2xl bg-[#0b0c12] border border-white/[0.06] overflow-hidden">
-                <div className="flex items-center gap-3 px-5 py-4 border-b border-white/[0.06]">
-                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#7c75ff]/15 to-[#4a9eff]/10 border border-[#7c75ff]/25 flex items-center justify-center">
-                    <RiRobot2Line className="text-sm text-[#7c75ff]" />
+              <div className="rounded-2xl bg-[#11121A] border border-white/[0.03] overflow-hidden shadow-2xl mt-8">
+                <div className="flex items-center gap-4 px-6 py-5 border-b border-white/[0.04] bg-[#0A0B14]">
+                  <div className="w-10 h-10 rounded-xl bg-[#fc7b43]/10 border border-[#fc7b43]/20 flex items-center justify-center">
+                    <RiRobot2Line className="text-lg text-[#fc7b43]" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-sm font-bold">AI Comparison Analysis</h3>
-                    <p className="text-[9px] text-white/25 font-mono uppercase tracking-[0.15em]">
+                    <h3 className="text-base font-medium text-white">AI Comparison Analysis</h3>
+                    <p className="text-[10px] text-[#fc7b43] font-mono uppercase tracking-[0.15em] mt-0.5">
                       {coinA.symbol} vs {coinB.symbol}
                     </p>
                   </div>
                   {reward && (
-                    <span className="text-[10px] font-bold font-mono text-[#f7c94b] bg-[#f7c94b]/10 px-2.5 py-1 rounded-md border border-[#f7c94b]/20">
-                      +{reward.earned} OKAI
+                    <span className="text-[11px] font-bold font-mono text-[#fc7b43] bg-[#fc7b43]/10 px-3 py-1.5 rounded-lg border border-[#fc7b43]/20">
+                      +{reward.earned} TSKR
                     </span>
                   )}
                 </div>
 
-                <div className="p-5">
+                <div className="p-6">
                   {aiLoading ? (
-                    <div className="flex flex-col items-center justify-center py-16 gap-4">
+                    <div className="flex flex-col items-center justify-center py-20 gap-5">
                       <div className="relative">
-                        <div className="w-10 h-10 border-2 border-[#7c75ff]/20 border-t-[#7c75ff] rounded-full animate-spin" />
-                        <div className="absolute inset-0 w-10 h-10 border-2 border-transparent border-b-[#f7c94b]/30 rounded-full animate-spin" style={{ animationDirection: "reverse", animationDuration: "1.5s" }} />
+                        <div className="w-12 h-12 border-2 border-[#fc7b43]/20 border-t-[#fc7b43] rounded-full animate-spin" />
+                        <div className="absolute inset-0 w-12 h-12 border-2 border-transparent border-b-[#22D3EE]/30 rounded-full animate-spin" style={{ animationDirection: "reverse", animationDuration: "1.5s" }} />
                       </div>
-                      <p className="text-[11px] text-white/25 font-mono uppercase tracking-[0.2em]">
+                      <p className="text-[12px] text-[#fc7b43]/60 font-mono uppercase tracking-[0.2em]">
                         Analyzing {coinA.symbol} vs {coinB.symbol}...
                       </p>
                     </div>
                   ) : aiAnalysis ? (
-                    <div className="max-h-[60vh] overflow-y-auto custom-scrollbar pr-2">
+                    <div className="max-h-[60vh] overflow-y-auto custom-scrollbar pr-2 font-light text-[14px] leading-relaxed text-white/70 premium-markdown">
                       <MarkdownRenderer content={aiAnalysis} />
                     </div>
                   ) : (
-                    <div className="py-12 text-center">
-                      <RiSparklingLine className="text-2xl text-white/10 mx-auto mb-3" />
-                      <p className="text-sm text-white/25">
+                    <div className="py-16 text-center">
+                      <RiSparklingLine className="text-3xl text-white/10 mx-auto mb-4" />
+                      <p className="text-sm text-white/30 font-light">
                         AI analysis will appear here
                       </p>
                     </div>
@@ -459,13 +459,13 @@ export default function ComparePage() {
 
                 {/* Retry button */}
                 {aiAnalysis && !aiLoading && (
-                  <div className="px-5 pb-5">
+                  <div className="px-6 pb-6">
                     <button
                       onClick={runAICompare}
-                      className="w-full py-2.5 rounded-xl bg-white/[0.02] border border-white/[0.06] text-[11px] font-medium text-white/30 hover:text-white/50 hover:bg-white/[0.04] transition-all cursor-pointer flex items-center justify-center gap-1.5 uppercase tracking-wider"
+                      className="w-full py-3.5 rounded-xl bg-[#0A0B14] border border-white/[0.04] text-[12px] font-medium text-white/40 hover:text-white hover:bg-[#fc7b43]/10 hover:border-[#fc7b43]/30 transition-all cursor-pointer flex items-center justify-center gap-2 uppercase tracking-wider"
                     >
-                      <RiSparklingLine className="text-[#7c75ff]" />
-                      Re-analyze
+                      <RiSparklingLine className="text-[#fc7b43] text-lg" />
+                      Re-analyze with Taskora
                     </button>
                   </div>
                 )}
@@ -479,11 +479,13 @@ export default function ComparePage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
-            className="text-center py-16"
+            className="text-center py-24"
           >
-            <RiArrowLeftRightLine className="text-3xl text-white/10 mx-auto mb-3" />
-            <p className="text-sm text-white/20">
-              Select two tokens above to compare
+            <div className="w-16 h-16 rounded-2xl bg-[#11121A] border border-white/[0.03] flex items-center justify-center mx-auto mb-5 shadow-lg">
+              <RiArrowLeftRightLine className="text-3xl text-[#fc7b43]/40" />
+            </div>
+            <p className="text-base text-white/30 font-light">
+              Select two tokens above to initiate comparison
             </p>
           </motion.div>
         )}
@@ -498,8 +500,21 @@ export default function ComparePage() {
           background: transparent;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb {
-          background: rgba(255, 255, 255, 0.08);
+          background: rgba(255, 255, 255, 0.05);
           border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+          background: rgba(252, 123, 67, 0.3);
+        }
+        .premium-markdown .prose strong {
+          color: #fff;
+          font-weight: 500;
+          background: rgba(252, 123, 67, 0.1);
+          padding: 1px 5px;
+          border-radius: 4px;
+        }
+        .premium-markdown .prose ul > li::marker {
+          color: #fc7b43;
         }
       `}</style>
     </AppShell>
