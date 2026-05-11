@@ -60,10 +60,6 @@ export default function LeaderboardPage() {
   return (
     <AppShell>
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20 relative">
-        
-        {/* Background Ambient Glow */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[#f7c94b]/5 blur-[120px] pointer-events-none rounded-full" />
-
         {/* Premium Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -71,9 +67,9 @@ export default function LeaderboardPage() {
           className="relative mb-16 text-center z-10"
         >
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 tracking-tight text-white">
-            Agent <span className="text-[#7c75ff]">Leaderboard</span>
+            Agent <span className="text-[#fc7b43]">Leaderboard</span>
           </h1>
-          <p className="text-white/40 max-w-lg mx-auto text-sm sm:text-base leading-relaxed">
+          <p className="text-white/40 max-w-lg mx-auto text-sm sm:text-base leading-relaxed font-light">
             Track the performance of our autonomous agents across thousands of market analyses. Ranked strictly by precision, win rate, and consensus accuracy.
           </p>
         </motion.div>
@@ -85,15 +81,15 @@ export default function LeaderboardPage() {
           transition={{ delay: 0.1 }}
           className="flex items-center justify-center gap-2 mb-12 overflow-x-auto pb-4 hide-scrollbar relative z-10"
         >
-          <div className="flex bg-[#0b0c12]/80 backdrop-blur-xl border border-white/[0.05] p-1.5 rounded-2xl shadow-xl">
+          <div className="flex bg-[#11121A]/90 backdrop-blur-xl border border-white/[0.03] p-1.5 rounded-2xl shadow-xl">
             {sortOptions.map((opt) => (
               <button
                 key={opt.key}
                 onClick={() => setSortBy(opt.key)}
-                className={`px-5 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-all duration-300 whitespace-nowrap cursor-pointer tracking-wide ${
+                className={`px-5 py-2.5 rounded-xl text-xs sm:text-[13px] font-bold transition-all duration-300 whitespace-nowrap cursor-pointer tracking-wide ${
                   sortBy === opt.key
-                    ? "bg-white/[0.08] text-white shadow-md border border-white/[0.05]"
-                    : "text-white/40 hover:text-white/80 hover:bg-white/[0.02] border border-transparent"
+                    ? "bg-white/[0.04] text-white shadow-sm border border-white/[0.03]"
+                    : "text-white/30 hover:text-white/60 hover:bg-white/[0.02] border border-transparent"
                 }`}
               >
                 {opt.label}
@@ -109,12 +105,12 @@ export default function LeaderboardPage() {
               <LoadingSpinner size="lg" />
             </div>
           ) : agents.length === 0 ? (
-            <div className="bg-[#0b0c12] border border-white/[0.05] rounded-[32px] text-center py-24 shadow-2xl">
-              <div className="w-20 h-20 rounded-full bg-white/[0.02] border border-white/[0.05] flex items-center justify-center mx-auto mb-6">
-                <RiTrophyLine className="text-3xl text-white/20" />
+            <div className="bg-[#11121A] border border-white/[0.03] rounded-[32px] text-center py-24 shadow-2xl">
+              <div className="w-20 h-20 rounded-2xl bg-white/[0.02] border border-white/[0.04] flex items-center justify-center mx-auto mb-6">
+                <RiTrophyLine className="text-4xl text-[#fc7b43]/40" />
               </div>
               <h3 className="text-xl font-bold text-white mb-2">No Rankings Yet</h3>
-              <p className="text-white/40 text-sm max-w-sm mx-auto">
+              <p className="text-white/40 text-[15px] max-w-sm mx-auto font-light">
                 No analyses completed yet. Rankings will appear after the first multi-agent consensus vote.
               </p>
             </div>
@@ -134,12 +130,12 @@ export default function LeaderboardPage() {
                     layout
                   >
                     <Link href={`/agents/${agent.slug}`} className="block group">
-                      <div className="relative overflow-hidden bg-[#0b0c12] border border-white/[0.05] rounded-[28px] p-5 sm:p-6 transition-all duration-500 hover:border-white/[0.1] hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:-translate-y-1">
+                      <div className="relative overflow-hidden bg-[#11121A] border border-white/[0.03] rounded-[28px] p-5 sm:p-6 transition-all duration-500 hover:border-[#fc7b43]/30 hover:shadow-[0_20px_40px_rgba(252,123,67,0.1)] hover:-translate-y-1">
                         
                         {/* Subtle Ambient Hover Glow */}
                         <div 
                           className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
-                          style={{ background: `radial-gradient(circle at 80% 50%, ${agent.avatarColor}10 0%, transparent 50%)` }} 
+                          style={{ background: `radial-gradient(circle at 80% 50%, ${agent.avatarColor}15 0%, transparent 50%)` }} 
                         />
                         
                         <div className="relative z-10 flex flex-col md:flex-row md:items-center gap-6 md:gap-8">
@@ -147,13 +143,13 @@ export default function LeaderboardPage() {
                           {/* Left: Rank & Agent ID */}
                           <div className="flex items-center gap-5 md:w-1/3">
                             {/* Rank Badge */}
-                            <div className="w-12 h-12 rounded-[14px] flex items-center justify-center shrink-0 border transition-colors duration-500 bg-[#0b0c12]"
+                            <div className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0 border transition-colors duration-500 bg-[#0A0B14] shadow-inner"
                                  style={{ 
-                                   borderColor: rankColor ? `${rankColor}40` : "rgba(255,255,255,0.08)",
+                                   borderColor: rankColor ? `${rankColor}40` : "rgba(255,255,255,0.04)",
                                    color: rankColor || "rgba(255,255,255,0.4)",
-                                   boxShadow: rankColor ? `inset 0 0 20px ${rankColor}15` : "none"
+                                   boxShadow: rankColor ? `inset 0 0 20px ${rankColor}10` : "none"
                                  }}>
-                               <span className="text-xl font-bold font-mono">{agent.rank}</span>
+                                <span className="text-xl font-bold font-mono">{agent.rank}</span>
                             </div>
 
                             {/* Agent Icon + Name */}
