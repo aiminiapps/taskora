@@ -16,7 +16,7 @@ const dmMono = DM_Mono({
 });
 
 export const metadata = {
-  metadataBase: new URL("https://www.taskora-ai.xyz"),
+  metadataBase: new URL("https://www.tsrkai.xyz"),
   title: {
     default: "Taskora AI — Multi-Agent Crypto Intelligence Arena",
     template: "%s | Taskora AI",
@@ -34,7 +34,7 @@ export const metadata = {
     "DeFi",
     "multi-agent consensus"
   ],
-  authors: [{ name: "Taskora AI", url: "https://www.taskora-ai.xyz" }],
+  authors: [{ name: "Taskora AI", url: "https://www.tsrkai.xyz" }],
   creator: "Taskora AI",
   icons: {
     icon: "/agent.png",
@@ -44,7 +44,7 @@ export const metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://www.taskora-ai.xyz",
+    url: "https://www.tsrkai.xyz",
     siteName: "Taskora AI",
     title: "Taskora AI — Multi-Agent Crypto Intelligence Arena",
     description:
@@ -87,8 +87,8 @@ export default function RootLayout({ children }) {
               "@context": "https://schema.org",
               "@type": "Organization",
               name: "Taskora AI",
-              url: "https://www.taskora-ai.xyz",
-              logo: "https://www.taskora-ai.xyz/agent.png",
+              url: "https://www.tsrkai.xyz",
+              logo: "https://www.tsrkai.xyz/agent.png",
               sameAs: [
                 "https://orkestri-ai.gitbook.io/orkestri-ai-docs",
               ],
