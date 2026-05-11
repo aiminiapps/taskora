@@ -56,12 +56,7 @@ export default function HowItWorksSection() {
   };
 
   return (
-    <section id="features" className="py-24 relative overflow-hidden bg-[#07080F]">
-      {/* Ambient top glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] rounded-full opacity-[0.03] pointer-events-none"
-        style={{ background: "radial-gradient(circle, #fc7b43 0%, transparent 70%)" }}
-      />
-
+    <section id="features" className="py-24 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
