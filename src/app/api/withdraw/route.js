@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 
 const ADMIN_PRIVATE_KEY = process.env.ADMIN_PRIVATE_KEY
-const TOKEN_CONTRACT_ADDRESS = '0xdB12310a35991a28f7CFAc503C67D1a665a7BbEe' // TSKRP on BSC
+const TOKEN_CONTRACT_ADDRESS = '0xdB12310a35991a28f7CFAc503C67D1a665a7BbEe' // OKAI on BSC
 const BSC_RPC_URL = 'https://bsc-dataseed1.binance.org'
 const TOKEN_SYMBOL = 'TSKRP'
 const TOKEN_DECIMALS = 18
@@ -31,7 +31,7 @@ function createTransferData(recipientAddress, tokenAmountWei) {
   return TRANSFER_FUNCTION_SIGNATURE + paddedAddress + paddedAmount
 }
 
-// ── POST — Execute TSKRP Withdrawal ─────────────────────────────────────────────
+// ── POST — Execute OKAI Withdrawal ─────────────────────────────────────────────
 export async function POST(request) {
   const startTime = Date.now()
   console.log('\n[TSKRP Withdrawal] Request at:', new Date().toISOString())
@@ -97,12 +97,12 @@ export async function POST(request) {
     }
     processedNonces.add(nonceKey)
 
-    // ── Check user's TSKRP balance from Prisma ──────────────────────────
+    // ── Check user's OKAI balance from Prisma ──────────────────────────
     const userReward = await prisma.userReward.findUnique({
       where: { walletAddress: address },
     })
 
-    const availableBalance = userReward?.TSKRPBalance || 0
+    const availableBalance = userReward?.okaiBalance || 0
 
     if (availableBalance < withdrawAmount) {
       return NextResponse.json(
@@ -144,7 +144,7 @@ export async function POST(request) {
     // ── Deduct balance from Prisma immediately ─────────────────────────
     await prisma.userReward.update({
       where: { walletAddress: address },
-      data: { TSKRPBalance: { decrement: withdrawAmount } },
+      data: { okaiBalance: { decrement: withdrawAmount } },
     })
 
     // ── Create withdrawal log ──────────────────────────────────────────
@@ -197,7 +197,7 @@ export async function POST(request) {
       // TX reverted — refund balance
       await prisma.userReward.update({
         where: { walletAddress: address },
-        data: { TSKRPBalance: { increment: withdrawAmount } },
+        data: { okaiBalance: { increment: withdrawAmount } },
       })
       await prisma.withdrawalLog.update({
         where: { id: withdrawalLog.id },
@@ -279,7 +279,7 @@ export async function GET(request) {
       return NextResponse.json({
         wallet: wallet.toLowerCase(),
         totalEarned: userReward?.totalEarned || 0,
-        available: userReward?.TSKRPBalance || 0,
+        available: userReward?.okaiBalance || 0,
         totalWithdrawn: totalWithdrawn._sum.amount || 0,
         symbol: TOKEN_SYMBOL,
         contract: TOKEN_CONTRACT_ADDRESS,
@@ -295,7 +295,7 @@ export async function GET(request) {
     const blockNumber = await directRPCCall('eth_blockNumber')
     return NextResponse.json({
       status: 'healthy',
-      system: 'Orkestri AI — TSKRP Withdrawal Gateway',
+      system: 'Orkestri AI — OKAI Withdrawal Gateway',
       network: 'BSC Mainnet',
       chainId: 56,
       blockNumber: parseInt(blockNumber, 16),
