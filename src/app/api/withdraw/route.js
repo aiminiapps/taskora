@@ -4,7 +4,7 @@ import { prisma } from '@/lib/prisma'
 const ADMIN_PRIVATE_KEY = process.env.ADMIN_PRIVATE_KEY
 const TOKEN_CONTRACT_ADDRESS = '0xdB12310a35991a28f7CFAc503C67D1a665a7BbEe' // TSKRP on BSC
 const BSC_RPC_URL = 'https://bsc-dataseed1.binance.org'
-const TOKEN_SYMBOL = 'TSKRPP'
+const TOKEN_SYMBOL = 'TSKRP'
 const TOKEN_DECIMALS = 18
 const TRANSFER_FUNCTION_SIGNATURE = '0xa9059cbb'
 
@@ -34,7 +34,7 @@ function createTransferData(recipientAddress, tokenAmountWei) {
 // ── POST — Execute TSKRP Withdrawal ─────────────────────────────────────────────
 export async function POST(request) {
   const startTime = Date.now()
-  console.log('\n[TSKRPP Withdrawal] Request at:', new Date().toISOString())
+  console.log('\n[TSKRP Withdrawal] Request at:', new Date().toISOString())
 
   try {
     if (!ADMIN_PRIVATE_KEY) {
@@ -54,11 +54,11 @@ export async function POST(request) {
 
     const withdrawAmount = parseFloat(amount)
     if (isNaN(withdrawAmount) || withdrawAmount < 10) {
-      return NextResponse.json({ error: 'Minimum withdrawal is 10 TSKRPP' }, { status: 400 })
+      return NextResponse.json({ error: 'Minimum withdrawal is 10 TSKRP' }, { status: 400 })
     }
     if (withdrawAmount > 10000) {
       return NextResponse.json(
-        { error: 'Maximum withdrawal is 10,000 TSKRPP per transaction' },
+        { error: 'Maximum withdrawal is 10,000 TSKRP per transaction' },
         { status: 400 }
       )
     }
@@ -107,13 +107,13 @@ export async function POST(request) {
     if (availableBalance < withdrawAmount) {
       return NextResponse.json(
         {
-          error: `Insufficient balance. Available: ${availableBalance} TSKRPP, requested: ${withdrawAmount} TSKRPP`,
+          error: `Insufficient balance. Available: ${availableBalance} TSKRP, requested: ${withdrawAmount} TSKRP`,
         },
         { status: 400 }
       )
     }
 
-    console.log(`[TSKRPP Withdrawal] Sending ${withdrawAmount} TSKRPP to ${address}`)
+    console.log(`[TSKRP Withdrawal] Sending ${withdrawAmount} TSKRP to ${address}`)
 
     // ── Build & send on-chain transaction ───────────────────────────────
     await directRPCCall('eth_blockNumber') // verify RPC connectivity
@@ -139,7 +139,7 @@ export async function POST(request) {
 
     const signedTx = await adminWallet.signTransaction(rawTx)
     const txHash = await directRPCCall('eth_sendRawTransaction', [signedTx])
-    console.log('[TSKRPP Withdrawal] TX sent:', txHash)
+    console.log('[TSKRP Withdrawal] TX sent:', txHash)
 
     // ── Deduct balance from Prisma immediately ─────────────────────────
     await prisma.userReward.update({
@@ -226,7 +226,7 @@ export async function POST(request) {
     })
 
     console.log(
-      `[TSKRPP Withdrawal] SUCCESS: ${withdrawAmount} TSKRPP to ${address} (${processingTime}ms)`
+      `[TSKRP Withdrawal] SUCCESS: ${withdrawAmount} TSKRP to ${address} (${processingTime}ms)`
     )
 
     return NextResponse.json({
@@ -242,7 +242,7 @@ export async function POST(request) {
       timestamp: new Date().toISOString(),
     })
   } catch (error) {
-    console.error('[TSKRPP Withdrawal] Error:', error)
+    console.error('[TSKRP Withdrawal] Error:', error)
     return NextResponse.json(
       { error: 'Transaction failed: ' + error.message },
       { status: 500 }
