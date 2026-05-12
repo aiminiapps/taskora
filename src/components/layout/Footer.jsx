@@ -33,7 +33,7 @@ export default function Footer() {
             <h4 className="text-white/60 font-semibold mb-6 tracking-wider uppercase text-xs">Ecosystem & Social</h4>
             <ul className="space-y-4">
               <li>
-                <a href="#" target="_blank" className="group flex items-center gap-2.5 text-white/30 hover:text-[#f3ba2f] transition-colors text-sm">
+                <a href="https://bscscan.com/token/0x9F2953d760C720B4201470cEd8347A8c1d22593D" target="_blank" className="group flex items-center gap-2.5 text-white/30 hover:text-[#f3ba2f] transition-colors text-sm">
                   <div className="w-6 h-6 rounded-md bg-white/[0.03] border border-white/[0.06] flex items-center justify-center group-hover:border-[#f3ba2f]/30 transition-colors">
                     <img src="https://cryptologos.cc/logos/bnb-bnb-logo.svg?v=025" alt="BSC" className="w-3.5 h-3.5 opacity-50 group-hover:opacity-100 transition-opacity" />
                   </div>
