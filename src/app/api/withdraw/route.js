@@ -2,9 +2,9 @@ import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 
 const ADMIN_PRIVATE_KEY = process.env.ADMIN_PRIVATE_KEY
-const TOKEN_CONTRACT_ADDRESS = '0xaA1aD1B852c0b59B4608A8B3e16B73518CDDB813' // OKAI on BSC
+const TOKEN_CONTRACT_ADDRESS = '0xdB12310a35991a28f7CFAc503C67D1a665a7BbEe' // TSKRP on BSC
 const BSC_RPC_URL = 'https://bsc-dataseed1.binance.org'
-const TOKEN_SYMBOL = 'OKAIP'
+const TOKEN_SYMBOL = 'TSKRPP'
 const TOKEN_DECIMALS = 18
 const TRANSFER_FUNCTION_SIGNATURE = '0xa9059cbb'
 
@@ -31,10 +31,10 @@ function createTransferData(recipientAddress, tokenAmountWei) {
   return TRANSFER_FUNCTION_SIGNATURE + paddedAddress + paddedAmount
 }
 
-// ── POST — Execute OKAI Withdrawal ─────────────────────────────────────────────
+// ── POST — Execute TSKRP Withdrawal ─────────────────────────────────────────────
 export async function POST(request) {
   const startTime = Date.now()
-  console.log('\n[OKAIP Withdrawal] Request at:', new Date().toISOString())
+  console.log('\n[TSKRPP Withdrawal] Request at:', new Date().toISOString())
 
   try {
     if (!ADMIN_PRIVATE_KEY) {
@@ -54,11 +54,11 @@ export async function POST(request) {
 
     const withdrawAmount = parseFloat(amount)
     if (isNaN(withdrawAmount) || withdrawAmount < 10) {
-      return NextResponse.json({ error: 'Minimum withdrawal is 10 OKAIP' }, { status: 400 })
+      return NextResponse.json({ error: 'Minimum withdrawal is 10 TSKRPP' }, { status: 400 })
     }
     if (withdrawAmount > 10000) {
       return NextResponse.json(
-        { error: 'Maximum withdrawal is 10,000 OKAIP per transaction' },
+        { error: 'Maximum withdrawal is 10,000 TSKRPP per transaction' },
         { status: 400 }
       )
     }
@@ -97,23 +97,23 @@ export async function POST(request) {
     }
     processedNonces.add(nonceKey)
 
-    // ── Check user's OKAI balance from Prisma ──────────────────────────
+    // ── Check user's TSKRP balance from Prisma ──────────────────────────
     const userReward = await prisma.userReward.findUnique({
       where: { walletAddress: address },
     })
 
-    const availableBalance = userReward?.okaiBalance || 0
+    const availableBalance = userReward?.TSKRPBalance || 0
 
     if (availableBalance < withdrawAmount) {
       return NextResponse.json(
         {
-          error: `Insufficient balance. Available: ${availableBalance} OKAIP, requested: ${withdrawAmount} OKAIP`,
+          error: `Insufficient balance. Available: ${availableBalance} TSKRPP, requested: ${withdrawAmount} TSKRPP`,
         },
         { status: 400 }
       )
     }
 
-    console.log(`[OKAIP Withdrawal] Sending ${withdrawAmount} OKAIP to ${address}`)
+    console.log(`[TSKRPP Withdrawal] Sending ${withdrawAmount} TSKRPP to ${address}`)
 
     // ── Build & send on-chain transaction ───────────────────────────────
     await directRPCCall('eth_blockNumber') // verify RPC connectivity
@@ -139,12 +139,12 @@ export async function POST(request) {
 
     const signedTx = await adminWallet.signTransaction(rawTx)
     const txHash = await directRPCCall('eth_sendRawTransaction', [signedTx])
-    console.log('[OKAIP Withdrawal] TX sent:', txHash)
+    console.log('[TSKRPP Withdrawal] TX sent:', txHash)
 
     // ── Deduct balance from Prisma immediately ─────────────────────────
     await prisma.userReward.update({
       where: { walletAddress: address },
-      data: { okaiBalance: { decrement: withdrawAmount } },
+      data: { TSKRPBalance: { decrement: withdrawAmount } },
     })
 
     // ── Create withdrawal log ──────────────────────────────────────────
@@ -197,7 +197,7 @@ export async function POST(request) {
       // TX reverted — refund balance
       await prisma.userReward.update({
         where: { walletAddress: address },
-        data: { okaiBalance: { increment: withdrawAmount } },
+        data: { TSKRPBalance: { increment: withdrawAmount } },
       })
       await prisma.withdrawalLog.update({
         where: { id: withdrawalLog.id },
@@ -226,7 +226,7 @@ export async function POST(request) {
     })
 
     console.log(
-      `[OKAIP Withdrawal] SUCCESS: ${withdrawAmount} OKAIP to ${address} (${processingTime}ms)`
+      `[TSKRPP Withdrawal] SUCCESS: ${withdrawAmount} TSKRPP to ${address} (${processingTime}ms)`
     )
 
     return NextResponse.json({
@@ -242,7 +242,7 @@ export async function POST(request) {
       timestamp: new Date().toISOString(),
     })
   } catch (error) {
-    console.error('[OKAIP Withdrawal] Error:', error)
+    console.error('[TSKRPP Withdrawal] Error:', error)
     return NextResponse.json(
       { error: 'Transaction failed: ' + error.message },
       { status: 500 }
@@ -279,7 +279,7 @@ export async function GET(request) {
       return NextResponse.json({
         wallet: wallet.toLowerCase(),
         totalEarned: userReward?.totalEarned || 0,
-        available: userReward?.okaiBalance || 0,
+        available: userReward?.TSKRPBalance || 0,
         totalWithdrawn: totalWithdrawn._sum.amount || 0,
         symbol: TOKEN_SYMBOL,
         contract: TOKEN_CONTRACT_ADDRESS,
@@ -295,7 +295,7 @@ export async function GET(request) {
     const blockNumber = await directRPCCall('eth_blockNumber')
     return NextResponse.json({
       status: 'healthy',
-      system: 'Orkestri AI — OKAI Withdrawal Gateway',
+      system: 'Orkestri AI — TSKRP Withdrawal Gateway',
       network: 'BSC Mainnet',
       chainId: 56,
       blockNumber: parseInt(blockNumber, 16),
